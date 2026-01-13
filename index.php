@@ -375,7 +375,7 @@
     <!-- Load Scripts Start -->
     <script src="js/libs.min.js"></script>
     <script src="js/gallery-init.js"></script>
-    <script src="js/custom.js?v=111"></script>
+    <script src="js/custom.js?v=2"></script>
     <script src="js/maps/map-color-1.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNMDtmEsvSevM4ztfsbhLfLNZhKHCvWXk"></script>
     <!-- Load Scripts End -->
