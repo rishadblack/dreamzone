@@ -558,7 +558,7 @@ $(function () {
   // --------------------------------------------- //
   // $('#countdown').countdown({ until: $.countdown.UTCDate(+6, 2026, 1, 11), format: 'D' });
   $('#countdown').countdown({
-    until: $.countdown.UTCDate(+6, 2026, 0, 14),
+    until: $.countdown.UTCDate(+6, 2026, 0, 15),
     layout: '{dn}Days {hn}:{mn}:{sn} ',
   });
 
