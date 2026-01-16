@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible"
+        content="@isset($title)
+    {{ $title }} |
+    @endisset
+    {{ config('app.name') }}">
+    <title>{{ config('app.name') }}</title>
+    <meta name="description"
+        content="@isset($title)
+    {{ $title }} |
+    @endisset
+    {{ config('app.name') }}">
+    <meta name="keywords"
+        content="@isset($title)
+    {{ $title }} |
+    @endisset
+    {{ config('app.name') }}">
+    <meta name="robots" content="INDEX,FOLLOW">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicons - Place favicon.ico in the root directory -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ 'frontend/img/favicons/favicon.png' }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ 'frontend/img/favicons/ms-icon-144x144.html' }}">
+    <meta name="theme-color" content="#ffffff">
+
+    <!--==============================
+ Google Fonts
+ ============================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ 'frontend/css/bootstrap.min.css' }}">
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="{{ 'frontend/css/all.min.css' }}">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{{ 'frontend/css/magnific-popup.min.css' }}">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="{{ 'frontend/css/slick.min.css' }}">
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{{ 'frontend/css/style.css' }}">
+
+    @livewireStyles
+    @vite(['resources/sass/backend.scss', 'resources/js/backend.js'])
+    @stack('css')
+</head>
+
+<body>
+
+    <!--==============================
+     Preloader
+    ==============================-->
+    <div class="preloader ">
+        <div class="preloader-inner">
+            <img src="{{ asset_logo() }}" alt="Ecotech">
+            <span class="loader"></span>
+        </div>
+    </div>
+
+    <div class="sidemenu-wrapper">
+        <div class="sidemenu-content">
+            <button class="closeButton sideMenuCls"><i class="fas fa-times"></i></button>
+            <div class="widget footer-widget">
+                <div class="widget-about">
+                    <div class="footer-logo">
+                        <a href="{{ route('frontend.home') }}"><img src="{{ asset_logo() }}" alt="Ecotech"></a>
+                    </div>
+                    <p class="about-text">Lorem ipsum dolor sit amet consectetur adipiscing elit sociosqu integer,
+                        suscipit nascetur aliquet posuere aptent vehicula ligula pulvinar praesent.</p>
+                    <div class="social-btn style2">
+                        <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                        <a href="https://pinterest.com/"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="https://instagram.com/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="widget widget_nav_menu footer-widget">
+                <h3 class="widget_title">Quick Links</h3>
+                <ul class="menu">
+                    <li><a href="{{ route('frontend.about') }}">About Us</a></li>
+                    <li><a href="project-details.html">Our Mission</a></li>
+                    <li><a href="{{ route('frontend.project') }}">Our Projects</a></li>
+                    <li><a href="{{ route('frontend.contact') }}">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--==============================
+    Mobile Menu
+    ============================== -->
+    <div class="mobile-menu-wrapper">
+        <div class="mobile-menu-area text-center">
+            <button class="menu-toggle"><i class="fas fa-times"></i></button>
+            <div class="mobile-logo">
+                <a href="{{ route('frontend.home') }}"><img src="{{ asset_logo() }}" alt="Ecotech"></a>
+            </div>
+            <div class="mobile-menu">
+                <ul>
+                    <li>
+                        <a href="{{ route('frontend.home') }}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('frontend.about') }}">About Us</a>
+
+                    </li>
+
+                    <li>
+                        <a href="{{ route('frontend.project') }}">Project</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('frontend.blog') }}">Blog</a>
+
+                    </li>
+                    <li>
+                        <a href="{{ route('frontend.contact') }}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--==============================
+ Header Area
+    ==============================-->
+    <header class="nav-header header-layout2">
+        <div class="header-top">
+            <div class="container">
+                <div class="row justify-content-center justify-content-sm-between align-items-center gy-2">
+                    <div class="col-auto d-none d-sm-block">
+                        <div class="header-links">
+                            <ul>
+                                <li class="d-lg-block d-none"><i class="fas fa-phone-alt"></i><a
+                                        href="tel:6295550329">01716201970</a></li>
+                                <li><i class="fas fa-envelope"></i><a
+                                        href="mailto:info@example.com">info@ecotech.com</a></li>
+                                <li class="d-md-block d-none"><i class="fas fa-map-marker-alt"></i>217/2, North
+                                    Shahajanpur, Dhaka</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="header-links">
+                            <ul>
+                                <li>
+                                    <div class="social-links">
+                                        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
+                                        <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+                                        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-wrapper">
+            <!-- Main Menu Area -->
+            <div class="container">
+                <div class="menu-area">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <div class="header-logo">
+                                <a href="{{ route('frontend.home') }}"
+                                    style="color: rgb(23, 23, 23);font-size:30px;font-weight:bold;">
+                                    Ecotech
+                                    {{-- <img src="{{(asset_logo())}}" alt="logo"> --}}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <nav class="main-menu d-none d-lg-inline-block">
+                                <ul>
+                                    <li>
+                                        <a href="{{ route('frontend.home') }}">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('frontend.about') }}">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('frontend.project') }}">Project</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Documents</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('frontend.contact') }}">Contact</a>
+                                    </li>
+
+                                </ul>
+                            </nav>
+                            <div class="navbar-right d-inline-flex d-lg-none">
+                                <button type="button" class="menu-toggle icon-btn"><i
+                                        class="fas fa-bars"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-auto d-none d-xl-block">
+                            <div class="header-button">
+                                <a href="{{ route('login') }}" class="btn style4">
+                                    Sign In
+                                    <i class="fas fa-angle-double-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {{ $slot }}
+    <!--==============================
+        Footer Area
+    ==============================-->
+    <footer class="footer-wrapper footer-layout1 overflow-hidden"
+        data-bg-src="{{ 'frontend/img/bg/footer-bg-1.svg' }}">
+        <div class="container">
+            <div class="footer-top">
+                <div class="row gy-4 align-items-center justify-content-center">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="info-card">
+                            <div class="info-card_icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="info-card_content">
+                                <h4 class="info-card_title">Our Location</h4>
+                                <p class="info-card_text">217/2, North Shahajanpur, Dhaka</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="info-card">
+                            <div class="info-card_icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="info-card_content">
+                                <h4 class="info-card_title">Call us</h4>
+                                <p class="info-card_text">Telephone : <a href="tel:0029129102320">0029129102320</a>
+                                </p>
+                                <p class="info-card_text">Mobile : <a href="tel:0029129102320">01716201970</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="info-card">
+                            <div class="info-card_icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-card_content">
+                                <h4 class="info-card_title">Our Email</h4>
+                                <p class="info-card_text">Main Email : <a
+                                        href="mailto:contact@website">contact@website</a></p>
+                                <p class="info-card_text">ComInquiries : <a
+                                        href="tel:info@mail.com">Info@ecotech.com</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-area">
+                <div class="row justify-content-between">
+                    <div class="col-md-6 col-xl-3 col-lg-4">
+                        <div class="widget footer-widget">
+                            <div class="widget-about">
+                                <div class="footer-logo">
+                                    <a href="{{ route('frontend.home') }}"><img src="{{ 'frontend/img/logo2.svg' }}"
+                                            alt="Ecotech"></a>
+                                </div>
+                                <p class="about-text">Protecting biodiversity and natural habitats is crucial for
+                                    maintaining a healthy and sustainable ecology.</p>
+                                <div class="social-btn style2">
+                                    <a href="https://facebook.com/" tabindex="0"><i
+                                            class="fab fa-facebook-f"></i></a>
+                                    <a href="https://twitter.com/" tabindex="0"><i class="fab fa-twitter"></i></a>
+                                    <a href="https://www.instagram.com/" tabindex="0"><i
+                                            class="fab fa-instagram"></i></a>
+                                    <a href="https://linkedin.com/" tabindex="0"><i
+                                            class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-auto col-lg-4">
+                        <div class="widget widget_nav_menu footer-widget">
+                            <h3 class="widget_title">Quick Link</h3>
+                            <div class="menu-all-pages-container">
+                                <ul class="menu">
+                                    <li><a href="{{ route('frontend.home') }}">Home</a></li>
+                                    <li><a href="{{ route('frontend.about') }}">About</a></li>
+                                    <li><a href="{{ route('frontend.blog') }}">Blog</a></li>
+                                    <li><a href="{{ route('frontend.project') }}">Project</a></li>
+                                    <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-lg-4">
+                        <div class="widget footer-widget">
+                            <h3 class="widget_title">Recent News</h3>
+                            <div class="recent-post-wrap">
+                                <div class="recent-post">
+                                    <div class="media-img">
+                                        <a href="blog-details.html"><img
+                                                src="{{ 'frontend/img/widget/recent-post1-1.jpg' }}"
+                                                alt="Blog Image"></a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="post-title"><a class="text-inherit" href="blog-details.html">Go
+                                                green and reduce your carbon…</a></h4>
+                                        <div class="recent-post-meta">
+                                            <a href="blog.html"><i class="fas fa-calendar"></i> April 3, 2024</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="recent-post">
+                                    <div class="media-img">
+                                        <a href="blog-details.html"><img
+                                                src="{{ 'frontend/img/widget/recent-post1-2.jpg' }}"
+                                                alt="Blog Image"></a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="post-title"><a class="text-inherit" href="blog-details.html">Make
+                                                a statement support of the…</a></h4>
+                                        <div class="recent-post-meta">
+                                            <a href="blog.html"><i class="fas fa-calendar"></i> April 3, 2024</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="widget footer-widget">
+                            <h3 class="widget_title">Newsletter</h3>
+                            <p class="footer-text">Your opinion is important to us. So contact us for any service.</p>
+                            <form class="newsletter-form">
+                                <div class="form-group">
+                                    <input class="form-control" type="email" placeholder="Your Email Address"
+                                        required="">
+                                </div>
+                                <button type="submit" class="btn"><i class="fas fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="row gy-3 justify-content-lg-between justify-content-center">
+                    <div class="col-auto align-self-center">
+                        <p class="copyright-text">© Copyright 2024 <a href="#">Ecotech.</a> All Rights Reserved
+                        </p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <div class="footer-links">
+                            <ul>
+                                <li><a href="about.html">Privacy Policy</a></li>
+                                <li><a href="about.html">Terms & Condition</a></li>
+                                <li><a href="about.html">Join Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--********************************
+   Code End  Here
+ ******************************** -->
+
+    <!-- Scroll To Top -->
+    <div class="scroll-top">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+                style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
+            </path>
+        </svg>
+    </div>
+
+
+    <!-- Jquery -->
+    <script src="{{ 'frontend/js/vendor/jquery-3.6.0.min.js' }}"></script>
+    <!-- Slick Slider -->
+    <script src="{{ 'frontend/js/slick.min.js' }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ 'frontend/js/bootstrap.min.js' }}"></script>
+    <!-- Magnific Popup -->
+    <script src="{{ 'frontend/js/jquery.magnific-popup.min.js' }}"></script>
+    <!-- Counter Up -->
+    <script src="{{ 'frontend/js/jquery.counterup.min.js' }}"></script>
+    <!-- Range Slider -->
+    <script src="{{ 'frontend/js/jquery-ui.min.js' }}"></script>
+
+    <!-- Isotope Filter -->
+    <script src="{{ 'frontend/js/imagesloaded.pkgd.min.js' }}"></script>
+    <script src="{{ 'frontend/js/isotope.pkgd.min.js' }}"></script>
+
+    <!-- Main Js File -->
+    <script src="{{ 'frontend/js/main.js' }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @livewireScripts
+    <x-livewire-alert::scripts />
+
+    @stack('js')
+</body>
+
+</html>

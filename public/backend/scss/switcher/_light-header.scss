@@ -1,0 +1,28 @@
+[data-header-style="light"] {
+    .app-header {
+        --header-bg: #fff;
+        --border: #f0f2fd;
+    }
+    .responsive-logo .main-logo .desktop-logo {
+        display: none;
+
+        &.desktop-logo-dark {
+            display: block;
+        }
+    }
+    .app-header .dropdown-menu {
+        border: 1px solid rgba(255, 255, 255, 0.1)
+    }
+    &[data-theme-color="dark"] {
+        .app-header {
+            .dropdown-divider {
+                border-block-start: 1px solid rgba(255, 255, 255, 0.06) !important;
+            }
+            .dropdown-menu-arrow:before {
+                border-inline-end: 1px solid rgba(255, 255, 255, 0.06);
+                border-block-start: 1px solid rgba(255, 255, 255, 0.06);
+            }
+        }
+        
+    }
+}
