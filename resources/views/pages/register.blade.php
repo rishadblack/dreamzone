@@ -69,8 +69,8 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
-        <div class="wrap-input100">
-            <input class="input100" type="text"wire:model="sponsor_username" placeholder="Ref ID">
+        <div class="wrap-input100" x-show="$wire.ref">
+            <input class="input100" type="text" wire:model="sponsor_username" placeholder="Ref ID" readonly>
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <i class="fa fa-users" aria-hidden="true"></i>

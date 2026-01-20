@@ -355,7 +355,7 @@
                                             <span class="side-menu__icon">
                                                 <i class="fe fe-download" aria-hidden="true"></i>
                                             </span>
-                                            <span class="side-menu__label text-truncate">Deposit</span>
+                                            <span class="side-menu__label text-truncate">Topup</span>
                                         </a>
                                     </li>
                                     <li class="slide">

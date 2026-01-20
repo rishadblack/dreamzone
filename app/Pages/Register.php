@@ -8,10 +8,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Url;
 
 #[Layout('layouts.auth')]
 class Register extends Component
 {
+    #[Url]
+    public $ref;
+
     public $name;
     public $mobile;
     public $email;
@@ -87,9 +91,9 @@ class Register extends Component
         $this->alert('success', 'Your account has been created successfully.Try to login now.');
     }
 
-    public function mount($ref = null)
+    public function mount()
     {
-        $this->sponsor_username = $ref;
+        $this->sponsor_username = $this->ref;
     }
 
     public function updatedCountryId()

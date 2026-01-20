@@ -11,13 +11,21 @@
                         {{ config('mlm.incentives.' . $memberTree->designation_plan . '.title') }}
                     @else
                         Member
+                    @endif <br />
+                    Step : @if ($memberTree->designation_plan)
+                        {{ config('mlm.incentives.' . $memberTree->designation_plan . '.title') }}
+                    @else
+                        -
                     @endif
                 </div>
                 <div class="col-md-6">
-                    Team A Point: {{ pointFormat($memberTree->l_premium, true) }}<br />
-                    Team B Point : {{ pointFormat($memberTree->c_premium, true) }}<br />
-                    Team A Member: {{ abs($memberTree->l_premium) }}<br />
-                    Team B Member : {{ abs($memberTree->c_premium) }}<br />
+                    Personal Point : {{ pointFormat($memberTree->p_point, true) }}<br />
+                    Refer Point : {{ pointFormat($memberTree->p_point, true) }}<br />
+                    Sales Point 1 : {{ pointFormat($memberTree->l_premium, true) }}<br />
+                    Sales Point 2 : {{ pointFormat($memberTree->c_premium, true) }}<br />
+                    Carry Point : {{ pointFormat($memberTree->p_point, true) }}<br />
+                    Sales 1 Member: {{ abs($memberTree->l_premium) }}<br />
+                    Sales 2 Member: {{ abs($memberTree->c_premium) }}<br />
                 </div>
             </div>
         @endif

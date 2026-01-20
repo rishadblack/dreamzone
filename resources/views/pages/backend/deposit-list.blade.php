@@ -1,10 +1,10 @@
 <div>
-    <x-slot name="title">Wallet Deposit</x-slot>
-    <x-slot name="header">Wallet Deposit</x-slot>
+    <x-slot name="title">Topup</x-slot>
+    <x-slot name="header">Topup</x-slot>
     <div class="row">
         <div class="col-lg-12 col-xl-3">
             <x-card>
-                <x-slot name="card_title">Wallet Deposit</x-slot>
+                <x-slot name="card_title">Topup</x-slot>
                 <div class="row">
                     <div class="col-sm-12 col-lg-12">
                         <x-input.select wire:model.live="payment_method_id" label="Deposit Payment Method"
