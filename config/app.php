@@ -20,7 +20,7 @@ return [
     'email' => env('APP_EMAIL', 'admin@admin.com'),
     'logo' => env('APP_LOGO', 'images/logo.png?v=1'),
     'default_profile' => env('APP_DEFAULT_PROFILE', 'images/male-icon.png?v=1'),
-    'point_sign' => env('APP_POINT_SIGN', 'EPV'),
+    'point_sign' => env('APP_POINT_SIGN', 'DPV'),
 
     /*
     |--------------------------------------------------------------------------

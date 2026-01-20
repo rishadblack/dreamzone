@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Providers;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($this->app->environment('production')) {
             URL::forceScheme('https');
+            request()->server->set('HTTPS', request()->header('X-Forwarded-Proto', 'https') == 'https' ? 'on' : 'off');
         }
 
         Builder::macro('whereLike', function ($attributes, string $searchTerm) {
@@ -49,7 +49,6 @@ class AppServiceProvider extends ServiceProvider
 
             return $this;
         });
-
 
         Storage::extend('google', function ($app, $config) {
 

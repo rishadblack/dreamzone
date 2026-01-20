@@ -295,7 +295,7 @@
                                     <div class="text-center mb-1">
                                         <h2 class="counter mb-2">{{ abs($User->generation_income) }}
                                         </h2>
-                                        <h6 class="mb-0">Total Team Member</h6>
+                                        <h6 class="mb-0">Total Sales Member</h6>
                                     </div>
                                 </div>
                             </div>
@@ -310,7 +310,7 @@
                                     <div class="text-center mb-1">
                                         <h2 class="counter mb-2">{{ abs($User->generation_income) }}
                                         </h2>
-                                        <h6 class="mb-0">Team A Member</h6>
+                                        <h6 class="mb-0">Sales Point 1</h6>
                                     </div>
                                 </div>
                             </div>
@@ -325,7 +325,7 @@
                                     <div class="text-center mb-1">
                                         <h2 class="counter mb-2">{{ abs($User->generation_income) }}
                                         </h2>
-                                        <h6 class="mb-0">Team B Member</h6>
+                                        <h6 class="mb-0">Sales Point 2</h6>
                                     </div>
                                 </div>
                             </div>
