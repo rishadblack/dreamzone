@@ -106,8 +106,8 @@ class MemberUpgrade extends Component
         $availablePoint = Point::availablePoint()->whereUserId($upgradeUser->id)->whereStatus(1)->first()->available_point;
 
         if ($this->is_free) {
-            if ($User->free_upgrade <= 0) {
-                $this->addError('value', 'You have not access special upgrade');
+            if ($User->id !== 1 && $User->free_upgrade <= 0) {
+                $this->addError('is_free', 'You have not access special upgrade');
                 return true;
             }
         } else {
@@ -161,7 +161,7 @@ class MemberUpgrade extends Component
                 $upgradePoint->status = 1;
                 $upgradePoint->save();
             } else {
-                $User->free_upgrade = $User->free_upgrade - 1;
+                $User->free_upgrade = $User->id !== 1 ? $User->free_upgrade - 1 : $User->free_upgrade;
                 $User->save();
             }
 
