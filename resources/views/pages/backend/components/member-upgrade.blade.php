@@ -2,7 +2,7 @@
     <x-modal id="MemberUpgradeModal" title="Account Activation" footer="button">
         @if ($placement_id)
             <div class="row">
-                @if (auth()->user()->free_upgrade > 0)
+                @if (auth()->user()->free_upgrade > 0 || auth()->user()->id == 1)
                     <div class="col-sm-12 col-lg-12">
                         <x-input.checkbox wire:model.live="is_free" label="Special Upgrade" />
                     </div>
