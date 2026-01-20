@@ -13,7 +13,7 @@
         </span>
 
         <div class="wrap-input100">
-            <input class="input100" type="text" wire:model="username" placeholder="User ID">
+            <input class="input100" type="text" wire:model="username" placeholder="Username or Mobile">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <i class="fa fa-envelope" aria-hidden="true"></i>

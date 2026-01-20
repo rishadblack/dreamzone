@@ -1,16 +1,14 @@
 <?php
-
 namespace App\Pages\Backend;
 
-use App\Models\Fund;
-use App\Models\User;
-use App\Models\Point;
-use App\Models\Income;
-use App\Models\Balance;
 use App\Http\Common\Component;
+use App\Models\Balance;
+use App\Models\Fund;
+use App\Models\Income;
 use App\Models\MemberTree;
+use App\Models\Point;
+use App\Models\User;
 use App\Models\Withdrawal;
-use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -27,7 +25,7 @@ class Dashboard extends Component
 
     public function rendered()
     {
-        if(setting('show_notic') == 'Y') {
+        if (setting('show_notic') == 'Y') {
             $this->dispatch('modalOpen', 'NoticModal');
         }
     }
@@ -40,7 +38,6 @@ class Dashboard extends Component
         $TotalIncome = Income::whereFlow(1)->whereUserId(Auth::id())->whereWalletType(1)->sum('amount');
         $TotalWithdrawal = Withdrawal::whereUserId(Auth::id())->whereStatus(1)->sum('amount');
         $TotalAttach = Fund::whereUserId(Auth::id())->whereNotNull('is_attached')->whereNull('is_detached_request')->whereStatus(1)->sum('attached_amount');
-
 
         $TotalSponsor = MemberTree::whereSponsorId(Auth::id())->count();
 

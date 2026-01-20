@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Traits;
 
 use App\Models\User;
@@ -19,7 +18,7 @@ trait UsernameSearchTrait
             'username' => ['string', 'min:4', 'exists:users,username'],
         ]);
 
-        if (!empty($value)) {
+        if (! empty($value)) {
             $User = User::select(['username', 'name'])->whereUsername($value)->first();
 
             if ($User) {
@@ -38,10 +37,10 @@ trait UsernameSearchTrait
         $this->reset('sponsor_username_name');
 
         $this->validateOnly('sponsor_username', [
-            'sponsor_username' => ['string', 'min:4', 'max:50', 'alpha_dash', 'exists:users,username'],
+            'sponsor_username' => ['string', 'min:4', 'exists:users,username'],
         ]);
 
-        if (!empty($value)) {
+        if (! empty($value)) {
             $User = User::select(['username', 'name'])->whereUsername($value)->first();
 
             if ($User) {
@@ -58,10 +57,10 @@ trait UsernameSearchTrait
         $this->reset('placement_username_name');
 
         $this->validateOnly('placement_username', [
-            'placement_username' => ['string', 'min:4', 'max:50', 'alpha_dash', 'exists:users,username'],
+            'placement_username' => ['string', 'min:4', 'exists:users,username'],
         ]);
 
-        if (!empty($value)) {
+        if (! empty($value)) {
             $User = User::select(['username', 'name'])->whereUsername($value)->first();
 
             if ($User) {

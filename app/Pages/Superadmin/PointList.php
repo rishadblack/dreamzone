@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Pages\Superadmin;
 
+use App\Http\Common\Component;
 use App\Models\Point;
 use App\Traits\UsernameSearchTrait;
 use App\Traits\UserTrait;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Http\Common\Component;
 
 class PointList extends Component
 {
@@ -27,12 +26,11 @@ class PointList extends Component
         'openPointModal',
     ];
 
-    public function openPointModal($id = null)
+    public function openPointModal($data = null)
     {
         $this->reset();
-
-        if (isset($id['id'])) {
-            $this->editPoint($id['id']);
+        if (isset($data['id'])) {
+            $this->editPoint($data['id']);
         }
 
         $this->dispatch('modalOpen', 'PointModal');
@@ -42,11 +40,11 @@ class PointList extends Component
     {
         $Point = Point::find($id);
         $this->username = $Point->User->username;
+        $this->flow = $Point->flow;
         $this->status = $Point->status;
         $this->note = $Point->note;
         $this->value = $Point->value;
         $this->point_id = $Point->id;
-
         $this->updatedUsername($Point->User->username);
     }
 
@@ -71,8 +69,8 @@ class PointList extends Component
         $Point->save();
 
         $this->dispatch('modalClose', 'PointModal');
-        $this->alert('success', 'Point generated successfull for '.$this->username_name);
-        $this->dispatch('refreshdatatable');
+        $this->alert('success', 'Point generated successfull for ' . $this->username_name);
+        $this->dispatch('refreshDatatable');
 
         $this->reset();
     }

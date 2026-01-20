@@ -1,10 +1,10 @@
 <div>
-    <x-slot name="title">Manage Wallet</x-slot>
-    <x-slot name="header">Manage Wallet</x-slot>
+    <x-slot name="title">Transfer</x-slot>
+    <x-slot name="header">Transfer</x-slot>
     <div class="row">
         <div class="col-lg-12 col-xl-3">
             <x-card>
-                <x-slot name="card_title">Manage Wallet</x-slot>
+                <x-slot name="card_title">Transfer</x-slot>
                 <div class="row">
                     <div class="col-sm-12 col-lg-12">
                         <label for="account_balance">Wallet Balance: </label>

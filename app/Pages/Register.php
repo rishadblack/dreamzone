@@ -1,17 +1,13 @@
 <?php
-
 namespace App\Pages;
 
-use App\Models\User;
-use App\Models\Country;
-use App\Jobs\ProcessSms;
-use App\Models\MemberTree;
-use Illuminate\Support\Str;
 use App\Http\Common\Component;
-use Livewire\Attributes\Layout;
+use App\Models\Country;
+use App\Models\MemberTree;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\RegisterConfirmationMail;
+use Illuminate\Support\Str;
+use Livewire\Attributes\Layout;
 
 #[Layout('layouts.auth')]
 class Register extends Component
@@ -30,20 +26,20 @@ class Register extends Component
 
     public function register()
     {
-        $this->username = str_pad(substr(time(), -4).str_pad((User::latest()->orderByDesc('id')->first()?->id + 1), 3, '0', STR_PAD_LEFT), 8, '0', STR_PAD_LEFT);
+        $this->username = str_pad(substr(time(), -4) . str_pad((User::latest()->orderByDesc('id')->first()?->id + 1), 3, '0', STR_PAD_LEFT), 8, '0', STR_PAD_LEFT);
         $this->pin = substr(time(), -4);
 
         $this->validate([
             'name' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'string', 'email', 'max:255','unique:users,email'],
-            'mobile' => ['required', 'string','min:11', 'max:11'],
-            'sponsor_username' => ['required', 'exists:users,username'],
+            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users,email'],
+            'mobile' => ['required', 'string', 'min:11', 'max:11', 'unique:users,mobile'],
+            'sponsor_username' => ['nullable', 'exists:users,username'],
             'password' => ['required', 'string', 'min:8', 'confirmed', 'max:255'],
         ]);
 
         $sponsor = User::where('username', $this->sponsor_username)->first();
 
-        if (!$sponsor) {
+        if ($this->sponsor_username && ! $sponsor) {
             $this->addError('sponsor_username', 'Sponsor not found.');
 
             return true;
@@ -65,7 +61,7 @@ class Register extends Component
 
             MemberTree::create([
                 'user_id' => $User->id,
-                'sponsor_id' => $sponsor->id,
+                'sponsor_id' => $sponsor ? $sponsor->id : null,
             ]);
 
             $User->assignRole('user');
@@ -82,11 +78,9 @@ class Register extends Component
             // Mail::to($User->email)->queue(new RegisterConfirmationMail($User, $this->password));
         }
 
-
         if ($User->mobile && config('sms.signup_msg')) {
-            ProcessSms::dispatchSync($User->mobile, config('sms.signup_msg').' ID: '.$this->username.' PW: '.$this->password, 'signup');
+            // ProcessSms::dispatchSync($User->mobile, config('sms.signup_msg') . ' ID: ' . $this->username . ' PW: ' . $this->password, 'signup');
         }
-
 
         $this->reset();
 
@@ -101,7 +95,7 @@ class Register extends Component
     public function updatedCountryId()
     {
         $country = Country::find($this->country_id);
-        if(!$country) {
+        if (! $country) {
             return;
         }
         $this->mobile_code = $country->phonecode;

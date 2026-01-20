@@ -1,10 +1,10 @@
 <div>
-    <x-slot name="title">Payout</x-slot>
-    <x-slot name="header">Payout</x-slot>
+    <x-slot name="title">Withdrawal</x-slot>
+    <x-slot name="header">Withdrawal</x-slot>
     <div class="row">
         <div class="col-lg-12 col-xl-3">
             <x-card>
-                <x-slot name="card_title">New Payout</x-slot>
+                <x-slot name="card_title">New Withdrawal</x-slot>
                 <div class="row">
                     <div class="col-sm-12 col-lg-12">
                         <label for="account_balance">Wallet: </label>
@@ -59,7 +59,7 @@
         <div class="col-lg-12 col-xl-9">
             <x-card>
                 <livewire:backend.datatable.withdrawal-table />
-                {{-- <x-slot name="card_title">Payout List</x-slot>
+                {{-- <x-slot name="card_title">Withdrawal List</x-slot>
                 <div wire:ignore class="table-responsive">
                     <table id="table" class="table table-sm table-bordered text-nowrap border-bottom"></table>
                 </div> --}}

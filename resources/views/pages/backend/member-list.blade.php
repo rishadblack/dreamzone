@@ -17,7 +17,7 @@
         </div>
     </x-card>
     <livewire:backend.components.member-view :no-footer="true" />
-    {{-- <livewire:backend.component.member-tree-register /> --}}
+    <livewire:backend.components.member-upgrade />
 
     <x-card>
         <div class="my-tree">
@@ -28,9 +28,9 @@
                         <li class="col-6">
                             @if ($teamAMember)
                                 <x-team-toolkit :teamMember="$teamAMember" class="col-8 offset-2 col-md-3 offset-md-4" />
-                                {{-- @elseif($teamMember)
-                                <x-team-register :placement_id="$teamMember->user_id" placement_team="1"
-                                    class="col-8 offset-2 col-md-3 offset-md-4" /> --}}
+                            @elseif($teamMember)
+                                <x-team-register :placement_id="$teamMember->user_id" placement_team="a"
+                                    class="col-8 offset-2 col-md-3 offset-md-4" />
                             @else
                                 <x-team-available class="col-8 offset-2 col-md-3 offset-md-4" />
                             @endif
@@ -38,9 +38,9 @@
                                 <li class="col-6">
                                     @if ($teamAMemberA)
                                         <x-team-toolkit :teamMember="$teamAMemberA" class="col-12 col-md-6 offset-md-3" />
-                                        {{-- @elseif($teamAMember)
-                                        <x-team-register :placement_id="$teamAMember->user_id" placement_team="1"
-                                            class="col-12 col-md-6 offset-md-3" /> --}}
+                                    @elseif($teamAMember)
+                                        <x-team-register :placement_id="$teamAMember->user_id" placement_team="a"
+                                            class="col-12 col-md-6 offset-md-3" />
                                     @else
                                         <x-team-available class="col-12 col-md-6 offset-md-3" />
                                     @endif
@@ -48,9 +48,9 @@
                                 <li class="col-6">
                                     @if ($teamAMemberB)
                                         <x-team-toolkit :teamMember="$teamAMemberB" class="col-12 col-md-6 offset-md-3" />
-                                        {{-- @elseif($teamAMember)
-                                        <x-team-register :placement_id="$teamAMember->user_id" placement_team="2"
-                                            class="col-12 col-md-6 offset-md-3" /> --}}
+                                    @elseif($teamAMember)
+                                        <x-team-register :placement_id="$teamAMember->user_id" placement_team="b"
+                                            class="col-12 col-md-6 offset-md-3" />
                                     @else
                                         <x-team-available class="col-12 col-md-6 offset-md-3" />
                                     @endif
@@ -60,9 +60,9 @@
                         <li class="col-6">
                             @if ($teamBMember)
                                 <x-team-toolkit :teamMember="$teamBMember" class="col-8 offset-2 col-md-3 offset-md-4" />
-                                {{-- @elseif($teamMember)
-                                <x-team-register :placement_id="$teamMember->user_id" placement_team="2"
-                                    class="col-8 offset-2 col-md-3 offset-md-4" /> --}}
+                            @elseif($teamMember)
+                                <x-team-register :placement_id="$teamMember->user_id" placement_team="b"
+                                    class="col-8 offset-2 col-md-3 offset-md-4" />
                             @else
                                 <x-team-available class="col-8 offset-2 col-md-3 offset-md-4" />
                             @endif
@@ -70,9 +70,9 @@
                                 <li class="col-6">
                                     @if ($teamBMemberA)
                                         <x-team-toolkit :teamMember="$teamBMemberA" class="col-12 col-md-6 offset-md-3" />
-                                        {{-- @elseif($teamBMember)
-                                        <x-team-register :placement_id="$teamBMember->user_id" placement_team="1"
-                                            class="col-12 col-md-6 offset-md-3" /> --}}
+                                    @elseif($teamBMember)
+                                        <x-team-register :placement_id="$teamBMember->user_id" placement_team="a"
+                                            class="col-12 col-md-6 offset-md-3" />
                                     @else
                                         <x-team-available class="col-12 col-md-6 offset-md-3" />
                                     @endif
@@ -80,9 +80,9 @@
                                 <li class="col-6">
                                     @if ($teamBMemberB)
                                         <x-team-toolkit :teamMember="$teamBMemberB" class="col-12 col-md-6 offset-md-3" />
-                                        {{-- @elseif($teamBMember)
-                                        <x-team-register :placement_id="$teamBMember->user_id" placement_team="2"
-                                            class="col-12 col-md-6 offset-md-3" /> --}}
+                                    @elseif($teamBMember)
+                                        <x-team-register :placement_id="$teamBMember->user_id" placement_team="b"
+                                            class="col-12 col-md-6 offset-md-3" />
                                     @else
                                         <x-team-available class="col-12 col-md-6 offset-md-3" />
                                     @endif
@@ -141,7 +141,7 @@
         }
 
         /*We need to remove left-right connectors from elements without
-                                                                                                                                                                                                                                                                                                                                                    any siblings*/
+                                                                                                                                                                                                                                                                                                                                                                                        any siblings*/
 
         .my-tree li:only-child::after,
         .my-tree li:only-child::before {
@@ -155,7 +155,7 @@
         }
 
         /*Remove left connector from first child and
-                                                                                                                                                                                                                                                                                                                                                    right connector from last child*/
+                                                                                                                                                                                                                                                                                                                                                                                        right connector from last child*/
 
         .my-tree li:first-child::before,
         .my-tree li:last-child::after {

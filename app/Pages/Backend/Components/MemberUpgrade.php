@@ -1,16 +1,15 @@
 <?php
-
 namespace App\Pages\Backend\Components;
 
-use Exception;
-use App\Models\User;
-use App\Models\Point;
-use App\Models\Package;
 use App\Http\Common\Component;
 use App\Models\MemberTree;
-use Illuminate\Support\Facades\DB;
+use App\Models\Package;
+use App\Models\Point;
+use App\Models\User;
 use App\Traits\UsernameSearchTrait;
+use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class MemberUpgrade extends Component
@@ -24,6 +23,8 @@ class MemberUpgrade extends Component
     public $username;
     public $value;
     public $available_point;
+    public $is_sponsor;
+    public $sponsor_username;
 
     protected $listeners = [
         'openMemberUpgradeModal',
@@ -34,23 +35,28 @@ class MemberUpgrade extends Component
         $this->resetErrorBag();
         $this->reset();
 
-        if (isset($data['id'])) {
-            $this->placement_id = $data['id'];
-            $this->placement_team = $data['team'];
-            $this->dispatch('modalOpen', 'MemberUpgradeModal');
+        if (isset($data['placement_id'])) {
+            $this->placement_id = $data['placement_id'];
+            $this->placement_team = $data['placement_team'];
         }
+        $this->dispatch('modalOpen', 'MemberUpgradeModal');
     }
 
     public function updated($key, $value)
     {
         $this->resetErrorBag();
 
-        if($key == 'username') {
+        if ($key == 'username') {
             $user = User::where('username', $value)->first();
 
             if ($user) {
                 $this->available_point = Point::availablePoint()->whereUserId($user->id)->whereStatus(1)->first()->available_point;
+                $this->is_sponsor = MemberTree::whereUserId($user->id)->whereNotNull('sponsor_id')->exists();
+            } else {
+                $this->available_point = 0;
+                $this->is_sponsor = null;
             }
+
         }
 
     }
@@ -60,15 +66,23 @@ class MemberUpgrade extends Component
         $Validation = [
             'username' => 'required|exists:users,username',
         ];
-        if(!$this->is_free) {
+
+        if (! $this->is_free) {
             $Validation = array_merge($Validation, [
                 'value' => 'required|numeric',
+            ]);
+        }
+
+        if (! $this->is_sponsor) {
+            $Validation = array_merge($Validation, [
+                'sponsor_username' => 'required|exists:users,username',
             ]);
         }
 
         $this->validate($Validation);
 
         $upgradeUser = User::whereUsername($this->username)->first();
+        $sponsorUser = User::whereUsername($this->sponsor_username)->first();
         $placementUser = User::find($this->placement_id);
         $User = Auth::user();
 
@@ -82,10 +96,17 @@ class MemberUpgrade extends Component
             return true;
         }
 
+        if (! $this->is_sponsor) {
+            if ($sponsorUser->id == $upgradeUser->id) {
+                $this->addError('sponsor_username', 'Sponsor can not be same as upgrade user');
+                return true;
+            }
+        }
+
         $availablePoint = Point::availablePoint()->whereUserId($upgradeUser->id)->whereStatus(1)->first()->available_point;
 
-        if($this->is_free) {
-            if($User->free_upgrade <= 0) {
+        if ($this->is_free) {
+            if ($User->free_upgrade <= 0) {
                 $this->addError('value', 'You have not access special upgrade');
                 return true;
             }
@@ -103,28 +124,25 @@ class MemberUpgrade extends Component
             }
         }
 
-
         if ($User->is_banned) {
             $this->alert('error', 'Your account is banned');
 
             return true;
         }
 
-        if($upgradeUser->memberTree->is_premium) {
+        if ($upgradeUser->memberTree->is_premium) {
             $this->alert('error', 'Member already activated');
 
             return true;
         }
 
-
-        if(!$placementUser->memberTree->is_premium) {
+        if (! $placementUser->memberTree->is_premium) {
             $this->alert('error', 'Placement user is not upgrade yet');
 
             return true;
         }
 
-
-        if(!$User->memberTree->is_premium) {
+        if (! $User->memberTree->is_premium) {
             $this->alert('error', 'You are not upgrade yet');
 
             return true;
@@ -132,7 +150,7 @@ class MemberUpgrade extends Component
 
         try {
             DB::beginTransaction();
-            if(!$this->is_free) {
+            if (! $this->is_free) {
                 $upgradePoint = new Point();
                 $upgradePoint->user_id = $upgradeUser->id;
                 $upgradePoint->parent_id = $User->id;
@@ -148,27 +166,26 @@ class MemberUpgrade extends Component
             }
 
             $PlacementMemberTree = MemberTree::where('user_id', $placementUser->id)->first();
-            if(!$PlacementMemberTree->l_id && $this->placement_team == 'a') {
+            if (! $PlacementMemberTree->l_id && $this->placement_team == 'a') {
                 $PlacementMemberTree->l_id = $upgradeUser->id;
-            } elseif(!$PlacementMemberTree->r_id) {
+            } elseif (! $PlacementMemberTree->r_id) {
                 $PlacementMemberTree->r_id = $upgradeUser->id;
             }
             $PlacementMemberTree->save();
 
-
             $MemberTree = MemberTree::where('user_id', $upgradeUser->id)->first();
-            $MemberTree->is_premium = $MemberTree->is_premium ?? now();
-            $MemberTree->p_point = Point::upgradePoint()->whereUserId($upgradeUser->user_id)->whereStatus(1)->first()->upgrade_point;
+            $MemberTree->p_point = Point::upgradePoint()->whereUserId($upgradeUser->id)->whereStatus(1)->first()->upgrade_point;
+            $Package = Package::where('point_value', '<=', $MemberTree->p_point)->active()->orderBy('point_value', 'desc')->first();
 
-            $Package =   Package::where('amount', '<=', $MemberTree->p_point)->active()->orderBy('amount', 'desc')->first();
+            $MemberTree->is_premium = $MemberTree->is_premium ?? now();
+            $MemberTree->sponsor_id = $this->is_sponsor ? $MemberTree->sponsor_id : $sponsorUser->id;
             $MemberTree->package_id = $Package ? $Package->id : null;
             $MemberTree->placement_id = $PlacementMemberTree->user_id;
             $MemberTree->save();
 
-            if(!$this->is_free && $MemberTree->sponsor_id) {
-                $this->sendSponsorBonus($MemberTree->user_id, $upgradePoint->value, $this->note, $upgradePoint->id);
+            if (! $this->is_free && $MemberTree->sponsor_id) {
+                // $this->sendSponsorBonus($MemberTree->user_id, $upgradePoint->value, '', $upgradePoint->id);
             }
-
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();
@@ -178,7 +195,7 @@ class MemberUpgrade extends Component
             return true;
         }
 
-        $this->dispatch('modalClose', 'TransferModal');
+        $this->dispatch('modalClose', 'MemberUpgradeModal');
         $this->dispatch('refreshDatatable');
         $this->alert('success', 'Member activated successfully');
         $this->reset();

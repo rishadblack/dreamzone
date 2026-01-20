@@ -1,12 +1,27 @@
 <?php
 
+use App\Models\MemberTree;
 use App\Models\Setting;
-use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
-use Nwidart\Modules\Facades\Module;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Nwidart\Modules\Facades\Module;
 
-if (!function_exists('getIndexValue')) {
+if (! function_exists('binary_member')) {
+    function binary_member()
+    {
+
+        $User = Auth::user();
+
+        if ($User->id == 1) {
+            return true;
+        }
+
+        return MemberTree::whereUserId($User->id)->whereNotNull('sponsor_id')->whereNotNull('placement_id')->exists();
+    }
+}
+
+if (! function_exists('getIndexValue')) {
     function getIndexValue(string $text, $index = 0)
     {
 
@@ -17,26 +32,25 @@ if (!function_exists('getIndexValue')) {
         }
 
         if (is_array($value)) {
-            if (!isset($value[$index])) {
+            if (! isset($value[$index])) {
                 return '';
             }
 
             return $value[$index];
         }
 
-        if($index == 0) {
+        if ($index == 0) {
             return $value;
         }
     }
 }
 
-
-if (!function_exists('setting')) {
+if (! function_exists('setting')) {
     function setting(string $parameter)
     {
         $Setting = Setting::whereParameter($parameter)->first('value');
 
-        if(!$Setting) {
+        if (! $Setting) {
             return null;
         }
 
@@ -44,14 +58,14 @@ if (!function_exists('setting')) {
     }
 }
 
-if (!function_exists('switchColLang')) {
+if (! function_exists('switchColLang')) {
     function switchColLang(string $enCol, string $bnCol)
     {
         return app()->getLocale() == 'bn' ? $bnCol : $enCol;
     }
 }
 
-if (!function_exists('perPageRows')) {
+if (! function_exists('perPageRows')) {
     function perPageRows($Data = [])
     {
         if (count($Data) > 0) {
@@ -62,20 +76,18 @@ if (!function_exists('perPageRows')) {
     }
 }
 
-
-if (!function_exists('addAllField')) {
+if (! function_exists('addAllField')) {
     function addAllField($Data)
     {
         if (count($Data) > 0) {
-            return [ null => 'All'] + $Data->toArray();
+            return [null => 'All'] + $Data->toArray();
         }
 
-        return [ null => 'All'];
+        return [null => 'All'];
     }
 }
 
-
-if (!function_exists('routeHome')) {
+if (! function_exists('routeHome')) {
     function routeHome()
     {
         if (checkModule('Website')) {
@@ -86,7 +98,7 @@ if (!function_exists('routeHome')) {
     }
 }
 
-if (!function_exists('checkModule')) {
+if (! function_exists('checkModule')) {
     function checkModule($moduleName)
     {
         if (Module::has($moduleName) && Module::isEnabled($moduleName)) {
@@ -97,11 +109,10 @@ if (!function_exists('checkModule')) {
     }
 }
 
-
-if (!function_exists('ucan')) {
+if (! function_exists('ucan')) {
     function ucan($permission)
     {
-        if(empty($permission)) {
+        if (empty($permission)) {
             return true;
         }
 
@@ -113,8 +124,7 @@ if (!function_exists('ucan')) {
     }
 }
 
-
-if (!function_exists('ucanh')) {
+if (! function_exists('ucanh')) {
     function ucanh($permission)
     {
         if (ucan($permission)) {
@@ -124,26 +134,26 @@ if (!function_exists('ucanh')) {
     }
 }
 
-if (!function_exists('exprienceTime')) {
+if (! function_exists('exprienceTime')) {
     function exprienceTime()
     {
-        $start  = new Carbon('1983');
+        $start = new Carbon('1983');
 
         return [
             'started' => $start->format('Y'),
-            'exp'   => $start->diffInYears(now())
+            'exp' => $start->diffInYears(now()),
         ];
     }
 }
 
-if (!function_exists('filterOption')) {
+if (! function_exists('filterOption')) {
     function filterOption($configName, $placeholder = 'All')
     {
         return collect([['id' => null, 'name' => $placeholder]])->merge(config($configName))->pluck('name', 'id')->toArray();
     }
 }
 
-if (!function_exists('isApp')) {
+if (! function_exists('isApp')) {
     function isApp()
     {
         $userAgent = request()->server('HTTP_USER_AGENT');
@@ -155,10 +165,10 @@ if (!function_exists('isApp')) {
     }
 }
 
-if (!function_exists('cartProductExists')) {
+if (! function_exists('cartProductExists')) {
     function cartProductExists($productId, $sessionArray = null)
     {
-        if (!$sessionArray) {
+        if (! $sessionArray) {
             $sessionArray = collect(session()->get('cart'))->toArray();
         }
 
@@ -170,14 +180,14 @@ if (!function_exists('cartProductExists')) {
     }
 }
 
-if (!function_exists('textShort')) {
+if (! function_exists('textShort')) {
     function textShort($text, $limit = 150, $sign = ' ...')
     {
         return Str::limit(strip_tags($text), $limit, $sign);
     }
 }
 
-if (!function_exists('pointFormat')) {
+if (! function_exists('pointFormat')) {
     function pointFormat($value, $sign = false, $decimal = false, $thousend = '')
     {
         $value = preg_replace('/[^0-9.-]/', '', $value);
@@ -186,12 +196,12 @@ if (!function_exists('pointFormat')) {
             $value = 0;
         }
 
-        if (!$decimal) {
+        if (! $decimal) {
             $decimal = 2;
         }
 
         if ($sign) {
-            if (!is_string($sign)) {
+            if (! is_string($sign)) {
                 $sign = config('app.point_sign');
             }
 
@@ -202,7 +212,7 @@ if (!function_exists('pointFormat')) {
     }
 }
 
-if (!function_exists('numberFormat')) {
+if (! function_exists('numberFormat')) {
     function numberFormat($value, $sign = false, $decimal = false, $thousend = '')
     {
         $value = preg_replace('/[^0-9.-]/', '', $value);
@@ -211,15 +221,14 @@ if (!function_exists('numberFormat')) {
             $value = 0;
         }
 
-        if (!$decimal) {
+        if (! $decimal) {
             $decimal = 2;
         } elseif (is_string($decimal)) {
             $decimal = $decimal;
         }
 
-
         if ($sign) {
-            if (!is_string($sign)) {
+            if (! is_string($sign)) {
                 $sign = currencySymbol();
             }
 
@@ -230,38 +239,35 @@ if (!function_exists('numberFormat')) {
     }
 }
 
-if (!function_exists('currencySymbol')) {
+if (! function_exists('currencySymbol')) {
     function currencySymbol()
     {
         return '৳';
     }
 }
 
-if (!function_exists('asset_storage')) {
+if (! function_exists('asset_storage')) {
     function asset_storage($path)
     {
         return asset('storage/' . $path);
     }
 }
 
-
-if (!function_exists('asset_favicon')) {
+if (! function_exists('asset_favicon')) {
     function asset_favicon($path = null)
     {
         return asset($path ? $path : config('app.logo'));
     }
 }
 
-
-if (!function_exists('asset_logo')) {
+if (! function_exists('asset_logo')) {
     function asset_logo($path = null)
     {
         return asset($path ? $path : config('app.logo'));
     }
 }
 
-
-if (!function_exists('asset_powered_logo')) {
+if (! function_exists('asset_powered_logo')) {
     function asset_powered_logo($path = null)
     {
         return 'https://www.pounce.fi/wp-content/uploads/2021/06/pounce-trans.png';
@@ -269,16 +275,14 @@ if (!function_exists('asset_powered_logo')) {
     }
 }
 
-
-if (!function_exists('asset_dark_logo')) {
+if (! function_exists('asset_dark_logo')) {
     function asset_dark_logo($path = null)
     {
         return asset($path ? $path : config('app.dark_logo'));
     }
 }
 
-
-if (!function_exists('asset_profile_picture')) {
+if (! function_exists('asset_profile_picture')) {
     function asset_profile_picture()
     {
         return asset('backend/images/users/avatar-1.jpg');
@@ -287,12 +291,10 @@ if (!function_exists('asset_profile_picture')) {
     }
 }
 
-
-
-if (!function_exists('numberFormatConverted')) {
+if (! function_exists('numberFormatConverted')) {
     function numberFormatConverted($value, $sign = false, $decimal = false, $thousend = '')
     {
-        if (!$decimal) {
+        if (! $decimal) {
             $decimal = 2;
         }
 
@@ -304,7 +306,7 @@ if (!function_exists('numberFormatConverted')) {
     }
 }
 
-if (!function_exists('percentFormat')) {
+if (! function_exists('percentFormat')) {
     function percentFormat($value, $decimal = 2, $percentSign = '%')
     {
         $value = preg_replace('/[^0-9-.%]/', '', $value);
@@ -317,7 +319,7 @@ if (!function_exists('percentFormat')) {
     }
 }
 
-if (!function_exists('numberFormatOrPercent')) {
+if (! function_exists('numberFormatOrPercent')) {
     function numberFormatOrPercent($value, $sign = false, $decimal = false, $thousend = '')
     {
         $value = preg_replace('/[^0-9-.%]/', '', $value);
@@ -330,7 +332,7 @@ if (!function_exists('numberFormatOrPercent')) {
     }
 }
 
-if (!function_exists('generateRandomString')) {
+if (! function_exists('generateRandomString')) {
     function generateRandomString($length = 20)
     {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -343,7 +345,7 @@ if (!function_exists('generateRandomString')) {
     }
 }
 
-if (!function_exists('getPercentOfValue')) {
+if (! function_exists('getPercentOfValue')) {
     function getPercentOfValue($percentage, $amount, $percenSign = true)
     {
         if ($percenSign) {
@@ -354,7 +356,7 @@ if (!function_exists('getPercentOfValue')) {
     }
 }
 
-if (!function_exists('getValueOfPercent')) {
+if (! function_exists('getValueOfPercent')) {
     function getValueOfPercent($profit, $amount)
     {
         $profitAmount = $profit - $amount;
@@ -369,7 +371,7 @@ if (!function_exists('getValueOfPercent')) {
     }
 }
 
-if (!function_exists('getTimeFormat')) {
+if (! function_exists('getTimeFormat')) {
     function getTimeFormat($timeFormat = null)
     {
         if ($timeFormat == 1) {
@@ -412,7 +414,7 @@ if (!function_exists('getTimeFormat')) {
     }
 }
 
-if (!function_exists('getTimeFormatJs')) {
+if (! function_exists('getTimeFormatJs')) {
     function getTimeFormatJs()
     {
         $getTimeFormat = getTimeFormat();
@@ -426,20 +428,20 @@ if (!function_exists('getTimeFormatJs')) {
     }
 }
 
-if (!function_exists('getfirstAndLastName')) {
+if (! function_exists('getfirstAndLastName')) {
     function getfirstAndLastName($name, $callBack)
     {
         $splitName = explode(' ', $name, 2);
 
         if ($callBack == 'first') {
-            return !empty($splitName[1]) ? $splitName[0] : '';
+            return ! empty($splitName[1]) ? $splitName[0] : '';
         } else {
-            return !empty($splitName[1]) ? $splitName[1] : $splitName[0];
+            return ! empty($splitName[1]) ? $splitName[1] : $splitName[0];
         }
     }
 }
 
-if (!function_exists('getFormatSize')) {
+if (! function_exists('getFormatSize')) {
     function getFormatSize($bytes)
     {
         $kb = 1024;
@@ -462,7 +464,7 @@ if (!function_exists('getFormatSize')) {
     }
 }
 
-if (!function_exists('getFolderSize')) {
+if (! function_exists('getFolderSize')) {
     function getFolderSize($dir)
     {
         $total_size = 0;
@@ -484,7 +486,7 @@ if (!function_exists('getFolderSize')) {
     }
 }
 
-if (!function_exists('checkDevice')) {
+if (! function_exists('checkDevice')) {
     function checkDevice()
     {
         $userAgent = request()->server('HTTP_USER_AGENT');
@@ -502,7 +504,7 @@ if (!function_exists('checkDevice')) {
         return $check;
     }
 }
-if (!function_exists('generateDepth')) {
+if (! function_exists('generateDepth')) {
     function generateDepth($depth, $sign = '-')
     {
         $prefix = '';
@@ -514,7 +516,7 @@ if (!function_exists('generateDepth')) {
     }
 }
 
-if (!function_exists('convertPipeToArray')) {
+if (! function_exists('convertPipeToArray')) {
     function convertPipeToArray(string $pipeString)
     {
         $pipeString = trim($pipeString);
@@ -530,14 +532,14 @@ if (!function_exists('convertPipeToArray')) {
             return explode('|', $pipeString);
         }
 
-        if (!in_array($quoteCharacter, ["'", '"'])) {
+        if (! in_array($quoteCharacter, ["'", '"'])) {
             return explode('|', $pipeString);
         }
 
         return explode('|', trim($pipeString, $quoteCharacter));
     }
 }
-if (!function_exists('status_config')) {
+if (! function_exists('status_config')) {
     function status_config($key = null, $default = null)
     {
         if (is_null($key)) {

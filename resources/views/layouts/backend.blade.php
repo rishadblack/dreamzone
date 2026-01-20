@@ -261,13 +261,13 @@
                                                         <span>Profile</span>
                                                     </a>
                                                 </li>
-                                                <li>
+                                                {{-- <li>
                                                     <a href="{{ route('backend.kyc') }}"
                                                         class="dropdown-item d-flex align-items-center" wire:navigate>
                                                         <i class="ri-settings-5-line fs-18 me-2 text-primary"></i>
                                                         <span>Kyc</span>
                                                     </a>
-                                                </li>
+                                                </li> --}}
                                                 <li>
                                                     <a href="{{ route('frontend.contact') }}"
                                                         class="dropdown-item d-flex aligni-tems-center">
@@ -326,62 +326,6 @@
                                     </a>
                                 </li>
                                 <li class="slide">
-                                    <a class="side-menu__item" href="{{ route('backend.withdrawal') }}">
-                                        <span class="side-menu__icon">
-                                            <i class="fe fe-upload" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="side-menu__label text-truncate">Payout</span>
-                                    </a>
-                                </li>
-                                <li class="slide">
-                                    <a class="side-menu__item" href="{{ route('backend.balance') }}">
-                                        <span class="side-menu__icon">
-                                            <i class="fe fe-send" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="side-menu__label text-truncate">Manage Wallet</span>
-                                    </a>
-                                </li>
-                                <li class="slide">
-                                    <a class="side-menu__item" href="{{ route('backend.deposit') }}">
-                                        <span class="side-menu__icon">
-                                            <i class="fe fe-download" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="side-menu__label text-truncate">Deposit</span>
-                                    </a>
-                                </li>
-                                <li class="slide">
-                                    <a class="side-menu__item" href="{{ route('backend.member_list') }}">
-                                        <span class="side-menu__icon">
-                                            <i class="fe fe-users" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="side-menu__label text-truncate">My Team</span>
-                                    </a>
-                                </li>
-                                {{-- <li class="slide">
-                                    <a class="side-menu__item" href="{{ route('backend.package_list') }}">
-                                        <span class="side-menu__icon">
-                                            <i class="fe fe-server" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="side-menu__label text-truncate">Packages</span>
-                                    </a>
-                                </li> --}}
-                                <li class="slide">
-                                    <a class="side-menu__item" href="{{ route('backend.upgrade_list') }}">
-                                        <span class="side-menu__icon">
-                                            <i class="fe fe-server" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="side-menu__label text-truncate">Upgrade</span>
-                                    </a>
-                                </li>
-                                <li class="slide">
-                                    <a class="side-menu__item" href="{{ route('ecommerce.shop') }}">
-                                        <span class="side-menu__icon">
-                                            <i class="fe fe-server" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="side-menu__label text-truncate">Shop</span>
-                                    </a>
-                                </li>
-                                {{-- <li class="slide">
                                     <a class="side-menu__item" href="{{ route('ecommerce.order_list') }}">
                                         <span class="side-menu__icon">
                                             <i class="fe fe-server" aria-hidden="true"></i>
@@ -389,7 +333,65 @@
                                         <span class="side-menu__label text-truncate">Order List</span>
                                     </a>
                                 </li>
-                                <li class="slide">
+                                @if (binary_member())
+                                    <li class="slide">
+                                        <a class="side-menu__item" href="{{ route('backend.withdrawal') }}">
+                                            <span class="side-menu__icon">
+                                                <i class="fe fe-upload" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="side-menu__label text-truncate">Withdrawal</span>
+                                        </a>
+                                    </li>
+                                    <li class="slide">
+                                        <a class="side-menu__item" href="{{ route('backend.balance') }}">
+                                            <span class="side-menu__icon">
+                                                <i class="fe fe-send" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="side-menu__label text-truncate">Transfer</span>
+                                        </a>
+                                    </li>
+                                    <li class="slide">
+                                        <a class="side-menu__item" href="{{ route('backend.deposit') }}">
+                                            <span class="side-menu__icon">
+                                                <i class="fe fe-download" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="side-menu__label text-truncate">Deposit</span>
+                                        </a>
+                                    </li>
+                                    <li class="slide">
+                                        <a class="side-menu__item" href="{{ route('backend.member_list') }}">
+                                            <span class="side-menu__icon">
+                                                <i class="fe fe-users" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="side-menu__label text-truncate">My Team</span>
+                                        </a>
+                                    </li>
+                                    {{-- <li class="slide">
+                                    <a class="side-menu__item" href="{{ route('backend.package_list') }}">
+                                        <span class="side-menu__icon">
+                                            <i class="fe fe-server" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="side-menu__label text-truncate">Packages</span>
+                                    </a>
+                                </li> --}}
+                                    {{-- <li class="slide">
+                                    <a class="side-menu__item" href="{{ route('backend.upgrade_list') }}">
+                                        <span class="side-menu__icon">
+                                            <i class="fe fe-server" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="side-menu__label text-truncate">Upgrade</span>
+                                    </a>
+                                </li> --}}
+                                    {{-- <li class="slide">
+                                    <a class="side-menu__item" href="{{ route('ecommerce.shop') }}">
+                                        <span class="side-menu__icon">
+                                            <i class="fe fe-server" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="side-menu__label text-truncate">Shop</span>
+                                    </a>
+                                </li> --}}
+
+                                    {{-- <li class="slide">
                                     <a class="side-menu__item" href="{{ route('ecommerce.dealer_delivery_list') }}">
                                         <span class="side-menu__icon">
                                             <i class="fe fe-server" aria-hidden="true"></i>
@@ -397,35 +399,39 @@
                                         <span class="side-menu__label text-truncate">Order Delivery</span>
                                     </a>
                                 </li> --}}
-                                <li class="slide">
-                                    <a class="side-menu__item " data-bs-toggle="slide" href="javascript:void(0);">
-                                        <span class="side-menu__icon">
-                                            <i class="fe fe-activity" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="side-menu__label text-truncate">Report</span>
-                                        <i class="angle fa fa-angle-right"></i>
-                                    </a>
-                                    <ul class="slide-menu">
-                                        <li>
-                                            <a class="slide-item" href="{{ route('backend.report.sponsor') }}"> Refer
-                                                List</a>
-                                            <a class="slide-item"
-                                                href="{{ route('backend.report.sponsor_income') }}">
-                                                Refer Commission</a>
-                                            <a class="slide-item"
-                                                href="{{ route('backend.report.generation_income') }}">
-                                                Team Commission</a>
-                                            <a class="slide-item" href="{{ route('backend.report.roi_income') }}">
-                                                Honorarium</a>
-                                            <a class="slide-item"
-                                                href="{{ route('backend.report.incentive_income') }}">
-                                                Incentives</a>
-                                            <a class="slide-item" href="{{ route('backend.report.balance') }}">
-                                                Balance List
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                    <li class="slide">
+                                        <a class="side-menu__item " data-bs-toggle="slide"
+                                            href="javascript:void(0);">
+                                            <span class="side-menu__icon">
+                                                <i class="fe fe-activity" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="side-menu__label text-truncate">Report</span>
+                                            <i class="angle fa fa-angle-right"></i>
+                                        </a>
+                                        <ul class="slide-menu">
+                                            <li>
+                                                <a class="slide-item" href="{{ route('backend.report.sponsor') }}">
+                                                    Refer
+                                                    List</a>
+                                                <a class="slide-item"
+                                                    href="{{ route('backend.report.sponsor_income') }}">
+                                                    Refer Commission</a>
+                                                <a class="slide-item"
+                                                    href="{{ route('backend.report.generation_income') }}">
+                                                    Team Commission</a>
+                                                <a class="slide-item"
+                                                    href="{{ route('backend.report.roi_income') }}">
+                                                    Honorarium</a>
+                                                <a class="slide-item"
+                                                    href="{{ route('backend.report.incentive_income') }}">
+                                                    Incentives</a>
+                                                <a class="slide-item" href="{{ route('backend.report.balance') }}">
+                                                    Balance List
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                @endif
                                 @hasanyrole('superadmin|admin|manager')
                                     <li class="slide">
                                         <a class="side-menu__item " data-bs-toggle="slide" href="javascript:void(0);">
@@ -635,6 +641,15 @@
             Livewire.dispatch($(this).data('listener'), {
                 data: $(this).data()
             });
+        });
+
+        $(document).on("click", "[data-listener]", function(event) {
+            var listener = $(this).data("listener");
+            if (listener) {
+                Livewire.dispatch(listener, {
+                    data: $(this).data(),
+                });
+            }
         });
     </script>
     @stack('js')

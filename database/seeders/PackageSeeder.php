@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use App\Models\Package;
@@ -18,13 +17,13 @@ class PackageSeeder extends Seeder
             [
                 'id' => 1,
                 'user_id' => 1,
-                'name' => 'Start Up',
+                'name' => 'General Uddokta',
                 'details' => '',
                 'flash_condition' => 0,
-                'point_value' => 1,
-                'amount' => 25,
+                'point_value' => 10,
+                'amount' => 0,
                 'to_amount' => null,
-                'type' => 1,
+                'type' => 2,
                 'status' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -32,31 +31,17 @@ class PackageSeeder extends Seeder
             [
                 'id' => 2,
                 'user_id' => 1,
-                'name' => 'Basic',
+                'name' => 'Pro-Uddokta',
                 'details' => '',
                 'flash_condition' => 0,
-                'point_value' => 1.25,
+                'point_value' => 100,
                 'amount' => 100,
                 'to_amount' => null,
-                'type' => 1,
+                'type' => 2,
                 'status' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'id' => 3,
-                'user_id' => 1,
-                'name' => 'Elite',
-                'details' => '',
-                'flash_condition' => 0,
-                'point_value' => 1.5,
-                'amount' => 500,
-                'to_amount' => null,
-                'type' => 1,
-                'status' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
         ];
         Package::insertOrIgnore($PackageList);
     }

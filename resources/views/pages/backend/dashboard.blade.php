@@ -17,7 +17,7 @@
                         <h3 class="mb-0 text-dark display-5 fw-bold d-inline-flex">
                             {{ numberFormat($Balance->available_balance, true) }}</h3>
                     </div>
-                    <div class="avatar avatar-lg bg-primary-transparent mb-auto ms-auto br-4">
+                    <div class="avatar avatar-lg bg-primary mb-auto ms-auto br-4">
                         <i class="bx bx-bar-chart fs-23"></i>
                     </div>
                 </div>
@@ -32,43 +32,46 @@
                         <h3 class="mb-0 text-dark display-5 fw-bold d-inline-flex">
                             {{ pointFormat($Point->available_point, true) }}</h3>
                     </div>
-                    <div class="avatar avatar-lg bg-primary-transparent mb-auto ms-auto br-4">
+                    <div class="avatar avatar-lg bg-primary mb-auto ms-auto br-4">
                         <i class="bx bx-bar-chart fs-23"></i>
                     </div>
                 </div>
                 <small class="mb-0 text-muted">Available Total Point</small>
             </x-card>
         </div>
-        <div class="col-sm-6 col-lg-6 col-xl-3">
-            <x-card class="bg-primary">
-                <div class="d-flex mb-1">
-                    <div>
-                        <h6 class="mb-2">Wallet Balance</h6>
-                        <h3 class="mb-0 text-dark display-5 fw-bold d-inline-flex">
-                            {{ numberFormat($TotalIncome - $TotalWithdrawal, true) }}</h3>
+
+        @if (binary_member())
+            <div class="col-sm-6 col-lg-6 col-xl-3">
+                <x-card class="bg-primary">
+                    <div class="d-flex mb-1">
+                        <div>
+                            <h6 class="mb-2">Wallet Balance</h6>
+                            <h3 class="mb-0 text-dark display-5 fw-bold d-inline-flex">
+                                {{ numberFormat($TotalIncome - $TotalWithdrawal, true) }}</h3>
+                        </div>
+                        <div class="avatar avatar-lg bg-primary mb-auto ms-auto br-4">
+                            <i class="bx bx-bar-chart fs-23"></i>
+                        </div>
                     </div>
-                    <div class="avatar avatar-lg bg-primary-transparent mb-auto ms-auto br-4">
-                        <i class="bx bx-bar-chart fs-23"></i>
+                    <small class="mb-0 text-muted">Available Wallet Balance</small>
+                </x-card>
+            </div>
+            <div class="col-sm-6 col-lg-6 col-xl-3">
+                <x-card class="bg-primary">
+                    <div class="d-flex mb-1">
+                        <div>
+                            <h6 class="mb-2">Payout</h6>
+                            <h3 class="mb-0 text-dark display-5 fw-bold d-inline-flex">
+                                {{ numberFormat($TotalWithdrawal, true) }}</h3>
+                        </div>
+                        <div class="avatar avatar-lg bg-primary mb-auto ms-auto br-4">
+                            <i class="bx bx-bar-chart fs-23"></i>
+                        </div>
                     </div>
-                </div>
-                <small class="mb-0 text-muted">Available Wallet Balance</small>
-            </x-card>
-        </div>
-        <div class="col-sm-6 col-lg-6 col-xl-3">
-            <x-card class="bg-primary">
-                <div class="d-flex mb-1">
-                    <div>
-                        <h6 class="mb-2">Payout</h6>
-                        <h3 class="mb-0 text-dark display-5 fw-bold d-inline-flex">
-                            {{ numberFormat($TotalWithdrawal, true) }}</h3>
-                    </div>
-                    <div class="avatar avatar-lg bg-primary-transparent mb-auto ms-auto br-4">
-                        <i class="bx bx-bar-chart fs-23"></i>
-                    </div>
-                </div>
-                <small class="mb-0 text-muted">Total Payout</small>
-            </x-card>
-        </div>
+                    <small class="mb-0 text-muted">Total Payout</small>
+                </x-card>
+            </div>
+        @endif
     </div>
     <div class="row">
         <div class="col-lg-4">
@@ -88,7 +91,7 @@
                         <h6>Details</h6>
                         <div class="main-profile-work-list">
                             <div class="media">
-                                <div class="media-logo bg-success-transparent text-success">
+                                <div class="media-logo bg-success text-success">
                                     <i class="fa fa-phone" aria-hidden="true"></i>
                                 </div>
                                 <div class="media-body">
@@ -97,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="media">
-                                <div class="media-logo bg-success-transparent text-success">
+                                <div class="media-logo bg-success text-success">
                                     <i class="fa fa-address-card" aria-hidden="true"></i>
                                 </div>
                                 <div class="media-body">
@@ -106,7 +109,7 @@
                                 </div>
                             </div>
                             <div class="media">
-                                <div class="media-logo bg-success-transparent text-success">
+                                <div class="media-logo bg-success text-success">
                                     <i class="fa fa-address-book" aria-hidden="true"></i>
                                 </div>
                                 <div class="media-body">
@@ -115,45 +118,48 @@
                                 </div>
                             </div>
                         </div>
-                        <h6 class="my-3">Account Details</h6>
-                        <div class="main-profile-social-list">
-                            <div class="media">
-                                <div class="media-icon bg-primary-transparent text-primary">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                        @if (binary_member())
+                            <h6 class="my-3">Account Details</h6>
+                            <div class="main-profile-social-list">
+                                <div class="media">
+                                    <div class="media-icon bg-primary text-primary">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span>Refer By</span>
+                                        <a class="refer-element"
+                                            href="javascript:void(0);">{{ $User->memberTree->sponsor_id ? $User->memberTree->bySponsor->username : 'System' }}</a>
+                                    </div>
                                 </div>
-                                <div class="media-body">
-                                    <span>Refer By</span>
-                                    {{-- <a class="refer-element" href="javascript:void(0);">{{ $User->memberTree->sponsor_id ? $User->memberTree->bySponsor->username : 'System' }}</a> --}}
+                                <div class="media">
+                                    <div class="media-icon bg-success text-success">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span>Placement By</span> <a
+                                            href="javascript:void(0);">{{ $User->memberTree->placement_id ? $User->memberTree->byPlacement->username : 'System' }}</a>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-icon bg-info text-info">
+                                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span>Activation Date</span> <a
+                                            href="javascript:void(0);">{{ $User->memberTree->is_premium ? $User->memberTree->is_premium->format('d-M-Y') : 'Not Active' }}</a>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-icon bg-danger text-danger">
+                                        <i class="ri-link-unlink-m"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span>Achievement</span> <a
+                                            href="javascript:void(0);">{{ $User->memberTree->incentive_id ? config('mlm.incentives.' . $User->memberTree->incentive_id . '.title') : 'Not Active' }}</a>
+                                    </div>
                                 </div>
                             </div>
-                            {{-- <div class="media">
-                                <div class="media-icon bg-success-transparent text-success">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                </div>
-                                <div class="media-body">
-                                    <span>Placement By</span> <a
-                                        href="javascript:void(0);">{{ $User->memberTree->placement_id ? $User->memberTree->byPlacement->username : 'System' }}</a>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="media-icon bg-info-transparent text-info">
-                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                </div>
-                                <div class="media-body">
-                                    <span>Activation Date</span> <a
-                                        href="javascript:void(0);">{{ $User->memberTree->is_premium ? $User->memberTree->is_premium->format('d-M-Y') : 'Not Active' }}</a>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="media-icon bg-danger-transparent text-danger">
-                                    <i class="ri-link-unlink-m"></i>
-                                </div>
-                                <div class="media-body">
-                                    <span>Achievement</span> <a
-                                        href="javascript:void(0);">{{ $User->memberTree->incentive_id ? config('mlm.incentives.' . $User->memberTree->incentive_id . '.title') : 'Not Active' }}</a>
-                                </div>
-                            </div> --}}
-                        </div>
+                        @endif
                     </div>
                     <div class="row mt-2 pb-2 bg-primary">
                         <div class="col-lg-12">
@@ -165,75 +171,184 @@
         </div>
         <div class="col-lg-8">
             <div class="row">
-                {{-- <div class="col-xl-3 col-lg-6 col-md-6">
-                    <x-card class="bg-primary-transparent">
+                <div class="col-xl-3 col-lg-6 col-md-6">
+                    <x-card class="bg-primary">
                         <div class="counter-status md-mb-0">
                             <div class="text-center mb-2">
                                 <x-heroicon-m-link class="about-icons" />
                             </div>
                             <div class="text-center text-white">
                                 <h2 class="counter mb-2">{{ $TotalSponsor }}</h2>
-                                <h6 class="mb-0">Total Refer</h6>
+                                <h6 class="mb-0">Total Sponsor</h6>
                             </div>
                         </div>
                     </x-card>
                 </div>
                 <div class="col-xl-3 col-lg-6 col-md-6">
-                    <div class="card bg-danger-transparent">
+                    <div class="card bg-danger">
                         <div class="card-body">
                             <div class="counter-status md-mb-0">
-                                <div class="text-center mb-1"> <x-heroicon-c-currency-dollar class="about-icons" />
-                                </div>
-                                <div class="text-center mb-1">
-                                    <h2 class="counter mb-2">{{ numberFormat($User->roi_income, true) }}</h2>
-                                    <h6 class="mb-0">Honorarium</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 col-md-6">
-                    <div class="card bg-warning-transparent">
-                        <div class="card-body">
-                            <div class="counter-status md-mb-0">
-                                <div class="text-center mb-1"> <x-heroicon-c-currency-dollar class="about-icons" />
-                                </div>
-                                <div class="text-center mb-1">
-                                    <h2 class="counter mb-2">{{ numberFormat($User->generation_income, true) }}</h2>
-                                    <h6 class="mb-0">Team Commission</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 col-md-6">
-                    <div class="card bg-info-transparent">
-                        <div class="card-body">
-                            <div class="counter-status md-mb-0">
-                                <div class="text-center mb-1"> <x-heroicon-c-currency-dollar class="about-icons" />
-                                </div>
-                                <div class="text-center mb-1">
-                                    <h2 class="counter mb-2">{{ numberFormat($User->incentive_income, true) }}</h2>
-                                    <h6 class="mb-0">Incentives</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 col-md-6">
-                    <div class="card bg-info-transparent">
-                        <div class="card-body">
-                            <div class="counter-status md-mb-0">
-                                <div class="text-center mb-1"> <x-heroicon-c-currency-dollar class="about-icons" />
+                                <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
                                 </div>
                                 <div class="text-center mb-1">
                                     <h2 class="counter mb-2">{{ numberFormat($TotalAttach, true) }}</h2>
-                                    <h6 class="mb-0">Total Commission</h6>
+                                    <h6 class="mb-0">Total Order Amount</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6">
+                    <div class="card bg-danger">
+                        <div class="card-body">
+                            <div class="counter-status md-mb-0">
+                                <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                </div>
+                                <div class="text-center mb-1">
+                                    <h2 class="counter mb-2">{{ pointFormat($TotalAttach, true) }}</h2>
+                                    <h6 class="mb-0">Total Order PV</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (binary_member())
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="card bg-success">
+                            <div class="card-body">
+                                <div class="counter-status md-mb-0">
+                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <h2 class="counter mb-2">{{ numberFormat($User->roi_income, true) }}</h2>
+                                        <h6 class="mb-0">Equal Income</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="card bg-success">
+                            <div class="card-body">
+                                <div class="counter-status md-mb-0">
+                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <h2 class="counter mb-2">{{ numberFormat($User->generation_income, true) }}
+                                        </h2>
+                                        <h6 class="mb-0">Equal Generation</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="card bg-success">
+                            <div class="card-body">
+                                <div class="counter-status md-mb-0">
+                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <h2 class="counter mb-2">{{ numberFormat($User->incentive_income, true) }}
+                                        </h2>
+                                        <h6 class="mb-0">Incentives</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="card bg-success">
+                            <div class="card-body">
+                                <div class="counter-status md-mb-0">
+                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <h2 class="counter mb-2">{{ numberFormat($User->roi_income, true) }}</h2>
+                                        <h6 class="mb-0">Sponsor Royalty Income</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="card bg-success">
+                            <div class="card-body">
+                                <div class="counter-status md-mb-0">
+                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <h2 class="counter mb-2">{{ numberFormat($User->generation_income, true) }}
+                                        </h2>
+                                        <h6 class="mb-0">Cash Back Income</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="card bg-info">
+                            <div class="card-body">
+                                <div class="counter-status md-mb-0">
+                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <h2 class="counter mb-2">{{ abs($User->generation_income) }}
+                                        </h2>
+                                        <h6 class="mb-0">Total Team Member</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="card bg-info">
+                            <div class="card-body">
+                                <div class="counter-status md-mb-0">
+                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <h2 class="counter mb-2">{{ abs($User->generation_income) }}
+                                        </h2>
+                                        <h6 class="mb-0">Team A Member</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="card bg-info">
+                            <div class="card-body">
+                                <div class="counter-status md-mb-0">
+                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <h2 class="counter mb-2">{{ abs($User->generation_income) }}
+                                        </h2>
+                                        <h6 class="mb-0">Team B Member</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @hasanyrole('superadmin|admin|dealer')
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="card bg-warning">
+                                <div class="card-body">
+                                    <div class="counter-status md-mb-0">
+                                        <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                        </div>
+                                        <div class="text-center mb-1">
+                                            <h2 class="counter mb-2">{{ numberFormat($User->generation_income, true) }}
+                                            </h2>
+                                            <h6 class="mb-0">Dealer Income</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endhasanyrole
+                @endif
             </div>
         </div>
     </div>

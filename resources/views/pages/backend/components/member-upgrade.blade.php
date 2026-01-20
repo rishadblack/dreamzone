@@ -10,6 +10,9 @@
                 <div class="col-sm-12 col-lg-12">
                     <x-input.username wire:model.live="username" label="To Member account" :username_name="$username_name" />
                 </div>
+                <div class="col-sm-12 col-lg-12" x-show="!$wire.is_sponsor">
+                    <x-input.username wire:model.live="sponsor_username" label="Sponsor" :username_name="$sponsor_username_name" />
+                </div>
                 <div class="col-sm-12 col-lg-12 {{ $is_free ? 'd-none' : '' }}">
                     <x-input.price wire:model="value" label="Point Value" :sign="config('app.point_sign')" />
                 </div>

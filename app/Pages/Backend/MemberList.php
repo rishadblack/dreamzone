@@ -23,6 +23,7 @@ class MemberList extends Component
 
     protected $listeners = [
         'getTeam',
+        'refreshDatatable' => '$refresh',
     ];
 
     public function updatedUsername($value)

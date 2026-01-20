@@ -1,15 +1,14 @@
 <?php
-
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -91,7 +90,13 @@ class User extends Authenticatable
 
     public function getProfileUrlAttribute()
     {
-        return $this->profile ? asset_storage($this->profile) : asset(config('mlm.default_profile'));
+        if ($this->profile) {
+            return asset_storage($this->profile);
+        }
+
+        $name = urlencode($this->name ?? 'User');
+
+        return "https://ui-avatars.com/api/?background=00ad57ab&color=fff&name={$name}";
     }
 
     public function Dealer(): HasOne

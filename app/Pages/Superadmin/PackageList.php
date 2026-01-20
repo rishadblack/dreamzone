@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Pages\Superadmin;
 
-use App\Models\Package;
 use App\Http\Common\Component;
-use Livewire\Attributes\On;
+use App\Models\Package;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 
 class PackageList extends Component
 {
@@ -21,7 +20,6 @@ class PackageList extends Component
     public $type;
     public $is_default;
     public $status;
-
 
     #[On('openPackageModal')]
     public function openPackageModal($data = null)
