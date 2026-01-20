@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'withdraw_charge' => 10,
-    'minumum_withdraw' => 10,
-    'maximum_withdraw' => 5,
-    'minumum_deposit' => 50,
-    'maximum_deposit' => 5000,
+    'withdraw_charge' => 7,
+    'minumum_withdraw' => 100,
+    'maximum_withdraw' => 50000,
+    'minumum_deposit' => 100,
+    'maximum_deposit' => 500000,
     'matching_point' => null,
     'matching_flash_point' => null,
     'minimum_matching_point_l' => null,
@@ -14,7 +14,6 @@ return [
     'minimum_attach' => 25,
     'return_charge' => 40,
 
-
     'income_list' => [
         1 => [
             'title' => 'Refer Income',
@@ -22,7 +21,7 @@ return [
             'percentage' => [
                 1 => 400,
                 2 => 450,
-                3 => 550
+                3 => 550,
             ],
             'delivery' => 'instant',
             'income_type' => 1,

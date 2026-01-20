@@ -257,11 +257,11 @@ return [
         ],
     ],
     'withdrawal_type' => [
-        // 1 => [
-        //     'name' => 'To Fund',
-        //     'value' => 'inactive',
-        //     'class' => 'success',
-        // ],
+        1 => [
+            'name' => 'To Balance Wallet',
+            'value' => 'inactive',
+            'class' => 'success',
+        ],
         2 => [
             'name' => 'To Bank/Cash',
             'value' => 'inactive',
@@ -331,7 +331,7 @@ return [
             'account_no' => null,
             'account_details' => '',
         ],
-         3 => [
+        3 => [
             'name' => 'Bkash',
             'value' => 'inactive',
             'class' => 'success',
@@ -571,7 +571,7 @@ return [
             'value' => 'inactive',
             'class' => 'success',
             'logo' => '',
-        ]
+        ],
     ],
     'point_status' => [
         1 => [

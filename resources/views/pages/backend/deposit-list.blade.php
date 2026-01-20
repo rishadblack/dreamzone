@@ -11,13 +11,13 @@
                             :options="config('status.payment_method')" />
 
                     </div>
-                    @if ($payment_method_id)
+                    {{-- @if ($payment_method_id)
                         <div class="col-sm-12 col-lg-12">
                             <img src="{{ asset('images/' . config('status.payment_method.' . $payment_method_id . '.logo')) }}"
                                 class="mt-2 mb-2 img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
                                 alt="">
                         </div>
-                    @endif
+                    @endif --}}
                     <div class="col-sm-12 col-lg-12">
                         <x-input.price wire:model.live.debounce.1000ms="amount" label="Amount" />
                     </div>
@@ -27,7 +27,7 @@
                     <div class="col-sm-12 col-lg-12">
                         <x-input.price wire:model="net_amount" label="Net Amount" read-only="true" />
                     </div>
-                    @if ($payment_method_id)
+                    {{-- @if ($payment_method_id)
                         <div class="col-sm-12 col-lg-12">
                             <x-input.text-copy wire:model="to_account" label="Deposit TRC20 Account" read-only="true" />
                         </div>
@@ -36,7 +36,7 @@
                                 src="data:images/png;base64, {{ base64_encode(QrCode::format('png')->size(200)->merge(asset_logo(), 0.5, true)->generate(config('status.payment_method.' . $payment_method_id . '.account_no'))) }}"
                                 alt="">
                         </div>
-                    @endif
+                    @endif --}}
                     <div class="col-sm-12 col-lg-12">
                         <x-input.textarea wire:model="note" label="Remark" placeholder="Optional.." />
                     </div>
