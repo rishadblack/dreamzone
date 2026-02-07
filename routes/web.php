@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Pages\Frontend;
 use App\Pages\Login;
 use App\Pages\Register;
 use Illuminate\Support\Facades\Route;
@@ -11,15 +12,13 @@ Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])->name('
 
 Route::group(['prefix' => '/', 'as' => 'frontend.'], function () {
     // Route::permanentRedirect('/', 'login');
-    Route::get('/', Login::class)->name('home');
-    Route::get('contact', Login::class)->name('contact');
-    // Route::get('/', Home::class)->name('home');
-    // Route::get('about', About::class)->name('about');
-    // Route::get('contact', Contact::class)->name('contact');
-    // Route::get('project', Project::class)->name('project');
-    // Route::get('project-details', ProjectDetails::class)->name('project_details');
-    // Route::get('blog', Blog::class)->name('blog');
-    // Route::get('blog-details', BlogDetails::class)->name('blog_details');
+    Route::get('/', Frontend\Home::class)->name('home');
+    Route::get('about-us', Frontend\AboutUs::class)->name('about_us');
+    Route::get('shop', Frontend\Shop::class)->name('shop');
+    Route::get('product/{product_id}', Frontend\Product::class)->name('product');
+    Route::get('cart', Frontend\Cart::class)->name('cart');
+    Route::get('checkout', Frontend\Checkout::class)->name('checkout')->middleware('auth');
+    Route::get('contact-us', Frontend\ContactUs::class)->name('contact');
+    Route::get('privacy', Frontend\PrivacyPolicy::class)->name('privacy');
+    Route::get('terms-and-condition', Frontend\TermsAndCondition::class)->name('terms_and_condition');
 });
-
-// require __DIR__ . '/auth.php';

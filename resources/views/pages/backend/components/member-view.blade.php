@@ -20,10 +20,11 @@
                 </div>
                 <div class="col-md-6">
                     Personal Point : {{ pointFormat($memberTree->p_point, true) }}<br />
-                    Refer Point : {{ pointFormat($memberTree->p_point, true) }}<br />
+                    Refer Point : {{ pointFormat($refer_point, true) }}<br />
                     Sales Point 1 : {{ pointFormat($memberTree->l_premium, true) }}<br />
                     Sales Point 2 : {{ pointFormat($memberTree->c_premium, true) }}<br />
-                    Carry Point : {{ pointFormat($memberTree->p_point, true) }}<br />
+                    Carry Point :
+                    {{ pointFormat($memberTree->total_matching - $memberTree->paid_matching - $memberTree->flash_matching, true) }}<br />
                     Sales 1 Member: {{ abs($memberTree->l_premium) }}<br />
                     Sales 2 Member: {{ abs($memberTree->c_premium) }}<br />
                 </div>

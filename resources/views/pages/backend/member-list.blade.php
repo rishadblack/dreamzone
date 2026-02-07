@@ -5,7 +5,7 @@
     <x-card>
         <div class="row">
             <div class="col-md-4">
-                <x-input.text wire:model.blur="username" label="Search member's account" />
+                <x-input.text wire:model.change="username" label="Search member's account" />
             </div>
             @if ($teamMember->placement_id)
                 <div class="col-md-4">
@@ -25,7 +25,7 @@
                 <li class="col-12">
                     <x-team-toolkit :teamMember="$teamMember" class="col-6 offset-3 col-md-2 offset-md-5" />
                     <ul class="row">
-                        <li class="col-6">
+                        <li class="col-6" wire:key="team-member-a-{{ $teamMember->id }}">
                             @if ($teamAMember)
                                 <x-team-toolkit :teamMember="$teamAMember" class="col-8 offset-2 col-md-3 offset-md-4" />
                             @elseif($teamMember)
@@ -35,7 +35,7 @@
                                 <x-team-available class="col-8 offset-2 col-md-3 offset-md-4" />
                             @endif
                             <ul class="row">
-                                <li class="col-6">
+                                <li class="col-6" wire:key="team-member-a-a-{{ $teamMember->id }}">
                                     @if ($teamAMemberA)
                                         <x-team-toolkit :teamMember="$teamAMemberA" class="col-12 col-md-6 offset-md-3" />
                                     @elseif($teamAMember)
@@ -45,7 +45,7 @@
                                         <x-team-available class="col-12 col-md-6 offset-md-3" />
                                     @endif
                                 </li>
-                                <li class="col-6">
+                                <li class="col-6" wire:key="team-member-a-b-{{ $teamMember->id }}">
                                     @if ($teamAMemberB)
                                         <x-team-toolkit :teamMember="$teamAMemberB" class="col-12 col-md-6 offset-md-3" />
                                     @elseif($teamAMember)
@@ -57,7 +57,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="col-6">
+                        <li class="col-6" wire:key="team-member-b-{{ $teamMember->id }}">
                             @if ($teamBMember)
                                 <x-team-toolkit :teamMember="$teamBMember" class="col-8 offset-2 col-md-3 offset-md-4" />
                             @elseif($teamMember)
@@ -67,7 +67,7 @@
                                 <x-team-available class="col-8 offset-2 col-md-3 offset-md-4" />
                             @endif
                             <ul class="row">
-                                <li class="col-6">
+                                <li class="col-6" wire:key="team-member-b-a-{{ $teamMember->id }}">
                                     @if ($teamBMemberA)
                                         <x-team-toolkit :teamMember="$teamBMemberA" class="col-12 col-md-6 offset-md-3" />
                                     @elseif($teamBMember)
@@ -77,7 +77,7 @@
                                         <x-team-available class="col-12 col-md-6 offset-md-3" />
                                     @endif
                                 </li>
-                                <li class="col-6">
+                                <li class="col-6" wire:key="team-member-b-b-{{ $teamMember->id }}">
                                     @if ($teamBMemberB)
                                         <x-team-toolkit :teamMember="$teamBMemberB" class="col-12 col-md-6 offset-md-3" />
                                     @elseif($teamBMember)
@@ -141,7 +141,7 @@
         }
 
         /*We need to remove left-right connectors from elements without
-                                                                                                                                                                                                                                                                                                                                                                                        any siblings*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    any siblings*/
 
         .my-tree li:only-child::after,
         .my-tree li:only-child::before {
@@ -155,7 +155,7 @@
         }
 
         /*Remove left connector from first child and
-                                                                                                                                                                                                                                                                                                                                                                                        right connector from last child*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    right connector from last child*/
 
         .my-tree li:first-child::before,
         .my-tree li:last-child::after {

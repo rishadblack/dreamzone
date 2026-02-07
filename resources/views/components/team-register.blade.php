@@ -4,5 +4,5 @@
     <br />
     <button type="button" x-data
         @click="$dispatch('eventCallFunc',{callName:'openMemberUpgradeModal',placement_id:'{{ $attributes['placement_id'] }}',placement_team:'{{ $attributes['placement_team'] }}'})"
-        class="mt-1 mb-1 btn btn-sm btn-success">Register</button>
+        class="mt-1 mb-1 btn btn-sm btn-danger">Register</button>
 </div>

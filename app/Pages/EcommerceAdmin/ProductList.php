@@ -1,14 +1,13 @@
 <?php
-
 namespace App\Pages\EcommerceAdmin;
 
-use App\Models\Product;
-use Livewire\Attributes\On;
-use App\Models\ProductImage;
-use Livewire\WithFileUploads;
 use App\Http\Common\Component;
+use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
 
 class ProductList extends Component
 {
@@ -52,7 +51,7 @@ class ProductList extends Component
     public function editProduct($id)
     {
         $Product = Product::find($id);
-        if(!$Product) {
+        if (! $Product) {
             $this->alert('error', 'Product not found');
             return;
         }
@@ -89,13 +88,13 @@ class ProductList extends Component
             'category_id' => 'required|integer',
             'point' => 'required|numeric',
             'price' => 'required|numeric|min:1',
-            'product_images.*' => 'nullable|image|max:1024',
+            'product_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required',
         ]);
 
         $Product = Product::findOrNew($this->product_id);
 
-        if(!$this->product_id) {
+        if (! $this->product_id) {
             $Product->user_id = Auth::id();
             $message = 'Product created successfully';
         } else {
@@ -129,7 +128,7 @@ class ProductList extends Component
                 $ProductImage->status = $this->status;
                 $ProductImage->save();
 
-                if (!ProductImage::where('product_id', $Product->id)->default()->exists()) {
+                if (! ProductImage::where('product_id', $Product->id)->default()->exists()) {
                     $ProductImage->is_default = true;
                     $ProductImage->save();
                 }
@@ -148,11 +147,10 @@ class ProductList extends Component
     {
         $data = $this->alertConfirm($data, 'Are you sure you want to delete this category?');
 
-        if(isset($data['id'])) {
+        if (isset($data['id'])) {
             $Product = Product::find($data['id']);
 
-
-            if(!$Product) {
+            if (! $Product) {
                 $this->alert('error', 'Product not found');
                 return;
             }

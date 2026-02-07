@@ -2,6 +2,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\BalanceTrait;
+use App\Traits\PointTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -16,6 +18,8 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
     use HasRoles;
+    use BalanceTrait;
+    use PointTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -46,6 +50,7 @@ class User extends Authenticatable
         'is_agree' => 'datetime',
         'is_approve' => 'datetime',
         'is_banned' => 'datetime',
+        'additional_settings' => 'array',
     ];
 
     public function Balance(): HasMany

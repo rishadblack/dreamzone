@@ -30,11 +30,16 @@ class MemberList extends Component
     {
         $this->resetErrorBag();
 
-        $user = User::where('username', $value)->first();
-        if ($user) {
-            $this->getTeam(['data' => $user->id]);
+        if ($value) {
+            $user = User::where('username', $value)->first();
+
+            if ($user) {
+                $this->getTeam(['id' => $user->id]);
+            } else {
+                $this->addError('username', 'Search member account is not found');
+            }
         } else {
-            $this->addError('username', 'Search member account is not found');
+            $this->getTeam(['id' => auth()->id()]);
         }
     }
 

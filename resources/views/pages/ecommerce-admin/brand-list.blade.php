@@ -16,6 +16,22 @@
             <div class="col-sm-12 col-lg-12">
                 <x-input.text wire:model="name" label="Name" />
             </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="media">
+                    <div class="media-body">
+                        <x-input.file wire:model="image_url" label="Select Brand Images" size="1024KB" />
+                    </div>
+                    <div class="mr-25">
+                        @if ($image_url)
+                            <img class="rounded img-fluid" src="{{ $image_url->temporaryUrl() }}" width="50"
+                                height="50" alt="Card image cap">
+                        @elseif($image_url_preview)
+                            <img class="rounded img-fluid mt-2" src="{{ asset($image_url_preview) }}" width="50"
+                                height="50" alt="Card image cap">
+                        @endif
+                    </div>
+                </div>
+            </div>
             <div class="col-sm-12 col-lg-12">
                 <x-input.select wire:model="status" label="Status" :options="config('status.common_status')" />
             </div>

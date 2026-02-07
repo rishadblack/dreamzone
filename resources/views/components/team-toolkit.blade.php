@@ -6,5 +6,5 @@
         class="mx-auto avatar-md img-thumbnail rounded-circle" />
     <br />
     <button x-data @click="$dispatch('eventCallFunc',{callName:'openMemberViewModal',id:'{{ $teamMember->id }}'})"
-        class="mt-1 mb-1 badge bg-primary"">{{ $teamMember->User->username }}</span>
+        class="mt-1 mb-1 badge bg-success"">{{ $teamMember->User->username }}</span>
 </div>

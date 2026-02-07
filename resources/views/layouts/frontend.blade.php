@@ -2,421 +2,376 @@
 <html lang="en">
 
 <head>
-
-
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible"
-        content="@isset($title)
-    {{ $title }} |
-    @endisset
-    {{ config('app.name') }}">
-    <title>{{ config('app.name') }}</title>
-    <meta name="description"
-        content="@isset($title)
-    {{ $title }} |
-    @endisset
-    {{ config('app.name') }}">
-    <meta name="keywords"
-        content="@isset($title)
-    {{ $title }} |
-    @endisset
-    {{ config('app.name') }}">
-    <meta name="robots" content="INDEX,FOLLOW">
-
-    <!-- Mobile Specific Metas -->
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Favicons - Place favicon.ico in the root directory -->
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ 'frontend/img/favicons/favicon.png' }}">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{ 'frontend/img/favicons/ms-icon-144x144.html' }}">
-    <meta name="theme-color" content="#ffffff">
-
-    <!--==============================
- Google Fonts
- ============================== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap"
-        rel="stylesheet">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ 'frontend/css/bootstrap.min.css' }}">
-    <!-- Fontawesome Icon -->
-    <link rel="stylesheet" href="{{ 'frontend/css/all.min.css' }}">
-    <!-- Magnific Popup -->
-    <link rel="stylesheet" href="{{ 'frontend/css/magnific-popup.min.css' }}">
-    <!-- Slick Slider -->
-    <link rel="stylesheet" href="{{ 'frontend/css/slick.min.css' }}">
-
-    <!-- Theme Custom CSS -->
-    <link rel="stylesheet" href="{{ 'frontend/css/style.css' }}">
-
+    <meta name="template" content="{{ config('app.name') }}">
+    <meta name="title" content="{{ config('app.name') }}">
+    <meta name="keywords" content="{{ config('app.name') }}">
+    <title>{{ $title ? $title . ' |' : '' }} {{ config('app.name') }}</title>
+    <link rel="icon" href="{{ asset('frontend/images/favicon.png') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/fonts/flaticon/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/fonts/icofont/icofont.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/fonts/fontawesome/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/venobox/venobox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/slickslider/slick.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/niceselect/nice-select.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/bootstrap/bootstrap.min.css') }}?v=2">
+    <link rel="stylesheet" href="{{ asset('frontend/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/home-category.css') }}">
     @livewireStyles
-    @vite(['resources/sass/backend.scss', 'resources/js/backend.js'])
-    @stack('css')
+    @livewireScripts
+    @vite(['resources/sass/frontend.scss', 'resources/js/frontend.js'])
 </head>
 
 <body>
-
-    <!--==============================
-     Preloader
-    ==============================-->
-    <div class="preloader ">
-        <div class="preloader-inner">
-            <img src="{{ asset_logo() }}" alt="Ecotech">
-            <span class="loader"></span>
-        </div>
-    </div>
-
-    <div class="sidemenu-wrapper">
-        <div class="sidemenu-content">
-            <button class="closeButton sideMenuCls"><i class="fas fa-times"></i></button>
-            <div class="widget footer-widget">
-                <div class="widget-about">
-                    <div class="footer-logo">
-                        <a href="{{ route('frontend.home') }}"><img src="{{ asset_logo() }}" alt="Ecotech"></a>
-                    </div>
-                    <p class="about-text">Lorem ipsum dolor sit amet consectetur adipiscing elit sociosqu integer,
-                        suscipit nascetur aliquet posuere aptent vehicula ligula pulvinar praesent.</p>
-                    <div class="social-btn style2">
-                        <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
-                        <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
-                        <a href="https://pinterest.com/"><i class="fab fa-pinterest-p"></i></a>
-                        <a href="https://instagram.com/"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="widget widget_nav_menu footer-widget">
-                <h3 class="widget_title">Quick Links</h3>
-                <ul class="menu">
-                    <li><a href="{{ route('frontend.about') }}">About Us</a></li>
-                    <li><a href="project-details.html">Our Mission</a></li>
-                    <li><a href="{{ route('frontend.project') }}">Our Projects</a></li>
-                    <li><a href="{{ route('frontend.contact') }}">Contact Us</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!--==============================
-    Mobile Menu
-    ============================== -->
-    <div class="mobile-menu-wrapper">
-        <div class="mobile-menu-area text-center">
-            <button class="menu-toggle"><i class="fas fa-times"></i></button>
-            <div class="mobile-logo">
-                <a href="{{ route('frontend.home') }}"><img src="{{ asset_logo() }}" alt="Ecotech"></a>
-            </div>
-            <div class="mobile-menu">
-                <ul>
-                    <li>
-                        <a href="{{ route('frontend.home') }}">Home</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('frontend.about') }}">About Us</a>
-
-                    </li>
-
-                    <li>
-                        <a href="{{ route('frontend.project') }}">Project</a>
-                    </li>
-
-                    <li>
-                        <a href="{{ route('frontend.blog') }}">Blog</a>
-
-                    </li>
-                    <li>
-                        <a href="{{ route('frontend.contact') }}">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!--==============================
- Header Area
-    ==============================-->
-    <header class="nav-header header-layout2">
+    <div class="backdrop"></div><a class="backtop fas fa-arrow-up" href="#"></a>
+    @if (!isApp())
         <div class="header-top">
             <div class="container">
-                <div class="row justify-content-center justify-content-sm-between align-items-center gy-2">
-                    <div class="col-auto d-none d-sm-block">
-                        <div class="header-links">
-                            <ul>
-                                <li class="d-lg-block d-none"><i class="fas fa-phone-alt"></i><a
-                                        href="tel:6295550329">01716201970</a></li>
-                                <li><i class="fas fa-envelope"></i><a
-                                        href="mailto:info@example.com">info@ecotech.com</a></li>
-                                <li class="d-md-block d-none"><i class="fas fa-map-marker-alt"></i>217/2, North
-                                    Shahajanpur, Dhaka</li>
-                            </ul>
+                <div class="row">
+                    <div class="col-md-12 col-lg-5">
+                        <div class="header-top-welcome">
+                            <p>Welcome to {{ config('app.name') }} in Your Dream Online Store!</p>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="header-links">
-                            <ul>
-                                <li>
-                                    <div class="social-links">
-                                        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-                                        <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
-                                        <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
-                                        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="sticky-wrapper">
-            <!-- Main Menu Area -->
-            <div class="container">
-                <div class="menu-area">
-                    <div class="row align-items-center justify-content-between">
-                        <div class="col-auto">
-                            <div class="header-logo">
-                                <a href="{{ route('frontend.home') }}"
-                                    style="color: rgb(23, 23, 23);font-size:30px;font-weight:bold;">
-                                    Ecotech
-                                    {{-- <img src="{{(asset_logo())}}" alt="logo"> --}}
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <nav class="main-menu d-none d-lg-inline-block">
-                                <ul>
-                                    <li>
-                                        <a href="{{ route('frontend.home') }}">Home</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('frontend.about') }}">About</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('frontend.project') }}">Project</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Documents</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('frontend.contact') }}">Contact</a>
-                                    </li>
-
-                                </ul>
-                            </nav>
-                            <div class="navbar-right d-inline-flex d-lg-none">
-                                <button type="button" class="menu-toggle icon-btn"><i
-                                        class="fas fa-bars"></i></button>
-                            </div>
-                        </div>
-                        <div class="col-auto d-none d-xl-block">
-                            <div class="header-button">
-                                <a href="{{ route('login') }}" class="btn style4">
-                                    Sign In
-                                    <i class="fas fa-angle-double-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    {{ $slot }}
-    <!--==============================
-        Footer Area
-    ==============================-->
-    <footer class="footer-wrapper footer-layout1 overflow-hidden"
-        data-bg-src="{{ 'frontend/img/bg/footer-bg-1.svg' }}">
-        <div class="container">
-            <div class="footer-top">
-                <div class="row gy-4 align-items-center justify-content-center">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="info-card">
-                            <div class="info-card_icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="info-card_content">
-                                <h4 class="info-card_title">Our Location</h4>
-                                <p class="info-card_text">217/2, North Shahajanpur, Dhaka</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="info-card">
-                            <div class="info-card_icon">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <div class="info-card_content">
-                                <h4 class="info-card_title">Call us</h4>
-                                <p class="info-card_text">Telephone : <a href="tel:0029129102320">0029129102320</a>
-                                </p>
-                                <p class="info-card_text">Mobile : <a href="tel:0029129102320">01716201970</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="info-card">
-                            <div class="info-card_icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="info-card_content">
-                                <h4 class="info-card_title">Our Email</h4>
-                                <p class="info-card_text">Main Email : <a
-                                        href="mailto:contact@website">contact@website</a></p>
-                                <p class="info-card_text">ComInquiries : <a
-                                        href="tel:info@mail.com">Info@ecotech.com</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="widget-area">
-                <div class="row justify-content-between">
-                    <div class="col-md-6 col-xl-3 col-lg-4">
-                        <div class="widget footer-widget">
-                            <div class="widget-about">
-                                <div class="footer-logo">
-                                    <a href="{{ route('frontend.home') }}"><img src="{{ 'frontend/img/logo2.svg' }}"
-                                            alt="Ecotech"></a>
-                                </div>
-                                <p class="about-text">Protecting biodiversity and natural habitats is crucial for
-                                    maintaining a healthy and sustainable ecology.</p>
-                                <div class="social-btn style2">
-                                    <a href="https://facebook.com/" tabindex="0"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a href="https://twitter.com/" tabindex="0"><i class="fab fa-twitter"></i></a>
-                                    <a href="https://www.instagram.com/" tabindex="0"><i
-                                            class="fab fa-instagram"></i></a>
-                                    <a href="https://linkedin.com/" tabindex="0"><i
-                                            class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-auto col-lg-4">
-                        <div class="widget widget_nav_menu footer-widget">
-                            <h3 class="widget_title">Quick Link</h3>
-                            <div class="menu-all-pages-container">
-                                <ul class="menu">
-                                    <li><a href="{{ route('frontend.home') }}">Home</a></li>
-                                    <li><a href="{{ route('frontend.about') }}">About</a></li>
-                                    <li><a href="{{ route('frontend.blog') }}">Blog</a></li>
-                                    <li><a href="{{ route('frontend.project') }}">Project</a></li>
-                                    <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3 col-lg-4">
-                        <div class="widget footer-widget">
-                            <h3 class="widget_title">Recent News</h3>
-                            <div class="recent-post-wrap">
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html"><img
-                                                src="{{ 'frontend/img/widget/recent-post1-1.jpg' }}"
-                                                alt="Blog Image"></a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="post-title"><a class="text-inherit" href="blog-details.html">Go
-                                                green and reduce your carbon…</a></h4>
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html"><i class="fas fa-calendar"></i> April 3, 2024</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html"><img
-                                                src="{{ 'frontend/img/widget/recent-post1-2.jpg' }}"
-                                                alt="Blog Image"></a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="post-title"><a class="text-inherit" href="blog-details.html">Make
-                                                a statement support of the…</a></h4>
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html"><i class="fas fa-calendar"></i> April 3, 2024</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="widget footer-widget">
-                            <h3 class="widget_title">Newsletter</h3>
-                            <p class="footer-text">Your opinion is important to us. So contact us for any service.</p>
-                            <form class="newsletter-form">
-                                <div class="form-group">
-                                    <input class="form-control" type="email" placeholder="Your Email Address"
-                                        required="">
-                                </div>
-                                <button type="submit" class="btn"><i class="fas fa-paper-plane"></i></button>
-                            </form>
-                        </div>
+                    <div class="col-md-5 col-lg-3">
+                        {{-- <div class="header-top-select">
+                        <div class="header-select"><i class="icofont-world"></i><select class="select">
+                                <option value="english" selected>english</option>
+                                <option value="bangali">bangali</option>
+                                <option value="arabic">arabic</option>
+                            </select></div>
+                        <div class="header-select"><i class="icofont-money"></i><select class="select">
+                                <option value="english" selected>doller</option>
+                                <option value="bangali">pound</option>
+                                <option value="arabic">taka</option>
+                            </select></div>
                     </div> --}}
+                    </div>
+                    <div class="col-md-7 col-lg-4">
+                        <ul class="header-top-list">
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Sign Up</a></li>
+                            <li><a href="{{ route('frontend.contact') }}">contact us</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="copyright-wrap">
+        <header class="header-part">
             <div class="container">
-                <div class="row gy-3 justify-content-lg-between justify-content-center">
-                    <div class="col-auto align-self-center">
-                        <p class="copyright-text">© Copyright 2024 <a href="#">Ecotech.</a> All Rights Reserved
-                        </p>
+                <div class="header-content">
+                    <div class="header-media-group">
+                        <button class="header-user">
+                            <img src="{{ asset_logo() }}" alt="user">
+                        </button>
+                        <a href="{{ config('app.url') }}"><img src="{{ asset_logo() }}" alt="logo"></a>
+                        <button class="header-src"><i class="fas fa-search"></i></button>
                     </div>
-                    <div class="col-auto align-self-center">
+                    <a href="{{ config('app.url') }}" class="header-logo"> <img src="{{ asset_logo() }}"
+                            alt="logo"></a>
+                    @auth
+                        <a href="{{ route('backend.dashboard') }}" class="header-widget" title="My Account"><img
+                                src="{{ asset('frontend/images/user.png') }}" alt="user"><span>Dashboard</span></a>
+                    @endauth
+                    <form class="header-form">
+                        <input type="text" placeholder="Search anything...">
+                        <button><i class="fas fa-search"></i></button>
+                    </form>
+                    <div class="header-widget-group">
+                        {{-- <a href="compare.html" class="header-widget" title="Compare List"><i class="fas fa-random"></i><sup>0</sup></a>
+                    <a href="wishlist.html" class="header-widget" title="Wishlist"><i class="fas fa-heart"></i><sup>0</sup></a> --}}
+                        <livewire:frontend.component.cart-total />
+                    </div>
+                </div>
+            </div>
+        </header>
+    @endif
+    <nav class="navbar-part">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="navbar-content">
+                        <ul class="navbar-list">
+                            <li class="navbar-item"><a class="navbar-link" href="{{ route('frontend.home') }}">home</a>
+                            </li>
+                            <li class="navbar-item dropdown"><a class="navbar-link dropdown-arrow"
+                                    href="#">Categories</a>
+                                <ul class="dropdown-position-list">
+                                    @foreach (App\Models\Category::active()->get() as $category)
+                                        <li><a
+                                                href="{{ route('frontend.shop', ['category_id' => $category->id]) }}">{{ $category->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li class="navbar-item"><a class="navbar-link" href="{{ route('frontend.shop') }}">Shop</a>
+                            </li>
+                            <li class="navbar-item"><a class="navbar-link"
+                                    href="{{ route('frontend.about_us') }}">About Us</a></li>
+                            <li class="navbar-item"><a class="navbar-link"
+                                    href="{{ route('frontend.contact') }}">Contact Us</a></li>
+                        </ul>
+                        <div class="navbar-info-group">
+                            <div class="navbar-info"><i class="icofont-ui-touch-phone"></i>
+                                <p><small>call us</small><span>{{ config('app.phone') }}</span></p>
+                            </div>
+                            <div class="navbar-info"><i class="icofont-ui-email"></i>
+                                <p><small>email us</small><span>{{ config('app.email') }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <aside class="category-sidebar">
+        <div class="category-header">
+            <h4 class="category-title"><i class="fas fa-align-left"></i><span>categories</span></h4><button
+                class="category-close"><i class="icofont-close"></i></button>
+        </div>
+        <ul class="category-list">
+            @foreach (App\Models\Category::active()->get() as $category)
+                <li class="category-item"><a class="category-link"
+                        href="{{ route('frontend.shop', ['category_id' => $category->id]) }}"><i
+                            class="flaticon-vegetable"></i><span>{{ $category->name }}</span></a></li>
+            @endforeach
+        </ul>
+        <div class="category-footer">
+            <p>All Rights Reserved by <a href="{{ config('app.url') }}">{{ config('app.name') }}</a></p>
+        </div>
+    </aside>
+    <livewire:frontend.component.cart-list-component />
+    <aside class="nav-sidebar">
+        <div class="nav-header"><a href="{{ route('frontend.home') }}"><img src="{{ asset_logo() }}"
+                    alt="logo"></a><button class="nav-close"><i class="icofont-close"></i></button></div>
+        <div class="nav-content">
+            <ul class="nav-list">
+                <li><a class="nav-link" href="{{ route('frontend.home') }}"><i class="icofont-home"></i>Home</a>
+                </li>
+                <li><a class="nav-link" href="{{ route('login') }}"><i class="icofont-logout"></i>Login</a></li>
+            </ul>
+            <div class="nav-info-group">
+                <div class="nav-info"><i class="icofont-ui-touch-phone"></i>
+                    <p><small>call us</small><span>{{ config('app.phone') }}</span></p>
+                </div>
+                <div class="nav-info"><i class="icofont-ui-email"></i>
+                    <p><small>email us</small><span>{{ config('app.email') }}</span></p>
+                </div>
+            </div>
+            <div class="nav-footer">
+                <p>All Rights Reserved by <a href="{{ config('app.url') }}">{{ config('app.name') }}</a></p>
+            </div>
+        </div>
+    </aside>
+    <div class="mobile-menu">
+        <a href="{{ config('app.url') }}" title="Home Page">
+            <i class="fas fa-home"></i><span>Home</span>
+        </a><button class="cate-btn" title="Category List"><i class="fas fa-list"></i><span>category</span></button>
+        <button class="cart-btn" title="Cartlist"><i
+                class="fas fa-shopping-basket"></i><span>cartlist</span></button>
+        {{-- <a href="wishlist.html" title="Wishlist"><i class="fas fa-heart"></i><span>wishlist</span><sup>0</sup></a>
+        <a href="compare.html" title="Compare List"><i class="fas fa-random"></i><span>compare</span><sup>0</sup></a> --}}
+    </div>
+    {{ $slot }}
+    <section class="intro-part">
+        <div class="container">
+            <div class="row intro-content">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="intro-wrap">
+                        <div class="intro-icon"><i class="fas fa-truck"></i></div>
+                        <div class="intro-content">
+                            <h5>free home delivery</h5>
+                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="intro-wrap">
+                        <div class="intro-icon"><i class="fas fa-sync-alt"></i></div>
+                        <div class="intro-content">
+                            <h5>instant return policy</h5>
+                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="intro-wrap">
+                        <div class="intro-icon"><i class="fas fa-headset"></i></div>
+                        <div class="intro-content">
+                            <h5>quick support system</h5>
+                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="intro-wrap">
+                        <div class="intro-icon"><i class="fas fa-lock"></i></div>
+                        <div class="intro-content">
+                            <h5>secure payment way</h5>
+                            <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-part">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-xl-3">
+                    <div class="footer-widget"><a class="footer-logo" href="#"><img src="{{ asset_logo() }}"
+                                alt="logo"></a>
+                        <p class="footer-desc">Adipisci asperiores ipsum ipsa repellat consequatur repudiandae quisquam
+                            assumenda dolor perspiciatis sit ipsum dolor amet.</p>
+                        <ul class="footer-social">
+                            <li><a class="icofont-facebook" href="#"></a></li>
+                            <li><a class="icofont-twitter" href="#"></a></li>
+                            <li><a class="icofont-linkedin" href="#"></a></li>
+                            <li><a class="icofont-instagram" href="#"></a></li>
+                            <li><a class="icofont-pinterest" href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="footer-widget contact">
+                        <h3 class="footer-title">contact us</h3>
+                        <ul class="footer-contact">
+                            <li><i class="icofont-ui-email"></i>
+                                <p><span>{{ config('app.email') }}</span></p>
+                            </li>
+                            <li><i class="icofont-ui-touch-phone"></i>
+                                <p><span>{{ config('app.phone') }}</span></p>
+                            </li>
+                            <li><i class="icofont-location-pin"></i>
+                                <p>{{ config('app.address') }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="footer-widget">
+                        <h3 class="footer-title">quick Links</h3>
                         <div class="footer-links">
                             <ul>
-                                <li><a href="about.html">Privacy Policy</a></li>
-                                <li><a href="about.html">Terms & Condition</a></li>
-                                <li><a href="about.html">Join Us</a></li>
+                                <li><a href="#">My Account</a></li>
+                                <li><a href="#">Order History</a></li>
+                                <li><a href="#">Order Tracking</a></li>
+                                <li><a href="#">Best Seller</a></li>
+                                <li><a href="#">New Arrivals</a></li>
                             </ul>
+                            <ul>
+                                <li><a href="#">Location</a></li>
+                                <li><a href="#">Affiliates</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Carrer</a></li>
+                                <li><a href="#">Faq</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="footer-widget">
+                        <h3 class="footer-title">Download App</h3>
+                        <p class="footer-desc"></p>
+                        <div class="footer-app"><a href="#" target="_blank">
+                                <img src="{{ asset('frontend/images/google-store.png') }}" alt="google"></a>
+                            {{-- <a href="#"><img src="{{asset('frontend/images/app-store.png')}}" alt="app"></a> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        <p class="footer-copytext">&copy;{{ now()->format('Y') }} All Copyrights Reserved by <a
+                                href="{{ config('app.url') }}">{{ config('app.name') }}.</a></p>
+                        <div class="footer-card">
+                            <a href="#"><img src="{{ asset('frontend/images/payment/jpg/01.jpg') }}"
+                                    alt="payment"></a>
+                            <a href="#"><img src="{{ asset('frontend/images/payment/jpg/02.jpg') }}"
+                                    alt="payment"></a>
+                            <a href="#"><img src="{{ asset('frontend/images/payment/jpg/03.jpg') }}"
+                                    alt="payment"></a>
+                            <a href="#"> <img src="{{ asset('frontend/images/payment/jpg/04.jpg') }}"
+                                    alt="payment"></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-
-    <!--********************************
-   Code End  Here
- ******************************** -->
-
-    <!-- Scroll To Top -->
-    <div class="scroll-top">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
-                style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
-            </path>
-        </svg>
-    </div>
-
-
-    <!-- Jquery -->
-    <script src="{{ 'frontend/js/vendor/jquery-3.6.0.min.js' }}"></script>
-    <!-- Slick Slider -->
-    <script src="{{ 'frontend/js/slick.min.js' }}"></script>
-    <!-- Bootstrap -->
-    <script src="{{ 'frontend/js/bootstrap.min.js' }}"></script>
-    <!-- Magnific Popup -->
-    <script src="{{ 'frontend/js/jquery.magnific-popup.min.js' }}"></script>
-    <!-- Counter Up -->
-    <script src="{{ 'frontend/js/jquery.counterup.min.js' }}"></script>
-    <!-- Range Slider -->
-    <script src="{{ 'frontend/js/jquery-ui.min.js' }}"></script>
-
-    <!-- Isotope Filter -->
-    <script src="{{ 'frontend/js/imagesloaded.pkgd.min.js' }}"></script>
-    <script src="{{ 'frontend/js/isotope.pkgd.min.js' }}"></script>
-
-    <!-- Main Js File -->
-    <script src="{{ 'frontend/js/main.js' }}"></script>
+    <script src="{{ asset('frontend/vendor/bootstrap/jquery-1.12.4.min.js') }}"></script>
+    <script src="{{ asset('frontend/vendor/bootstrap/popper.min.js') }}"></script>
+    <script src="{{ asset('frontend/vendor/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('frontend/vendor/countdown/countdown.min.js') }}"></script>
+    <script src="{{ asset('frontend/vendor/niceselect/nice-select.min.js') }}"></script>
+    <script src="{{ asset('frontend/vendor/slickslider/slick.min.js') }}"></script>
+    <script src="{{ asset('frontend/vendor/venobox/venobox.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/nice-select.js') }}"></script>
+    <script src="{{ asset('frontend/js/countdown.js') }}"></script>
+    <script src="{{ asset('frontend/js/accordion.js') }}"></script>
+    <script src="{{ asset('frontend/js/venobox.js') }}"></script>
+    <script src="{{ asset('frontend/js/slick.js') }}"></script>
+    <script src="{{ asset('frontend/js/main.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @livewireScripts
     <x-livewire-alert::scripts />
+    <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
+    <x-livewire-alert::flash />
 
+    <script>
+        $(document).on('click', '.modalOpen', function() {
+            Livewire.dispatch($(this).data('modal'), {
+                data: $(this).data()
+            })
+        });
+
+        window.addEventListener('modalOpen', event => {
+            new window.bootstrap.Modal(document.getElementById(event.detail[0]), {
+                backdrop: false
+            }).show();
+        });
+
+        window.addEventListener('modalClose', event => {
+            var modalInstance = window.bootstrap.Modal.getInstance(document.getElementById(event.detail[0]));
+
+            if (modalInstance) {
+                modalInstance.hide();
+            } else {
+                new window.bootstrap.Modal(modalElement, {
+                    backdrop: false
+                }).hide();
+            }
+        });
+
+        window.addEventListener('callEventFunc', event => {
+            Livewire.dispatch(event.detail.callName, {
+                data: event.detail
+            })
+        });
+
+        window.addEventListener('eventCallFunc', event => {
+            Livewire.dispatch(event.detail.callName, {
+                data: event.detail
+            })
+        });
+
+        $(document).on('click', '.callEvent', function() {
+            Livewire.dispatch($(this).data('listener'), {
+                data: $(this).data()
+            });
+        });
+
+        $(document).on("click", "[data-listener]", function(event) {
+            var listener = $(this).data("listener");
+            if (listener) {
+                Livewire.dispatch(listener, {
+                    data: $(this).data(),
+                });
+            }
+        });
+    </script>
     @stack('js')
 </body>
 

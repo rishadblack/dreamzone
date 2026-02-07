@@ -1,26 +1,25 @@
 <?php
 
-use App\Pages\Superadmin\Settings;
-use App\Pages\Superadmin\Dashboard;
-use App\Pages\Superadmin\OrderList;
-use App\Pages\Superadmin\PointList;
-use App\Pages\Superadmin\DealerList;
-use App\Pages\Superadmin\IncomeList;
-use App\Pages\Superadmin\MemberList;
-use App\Pages\Superadmin\TicketList;
-use App\Pages\Superadmin\BalanceList;
-use App\Pages\Superadmin\DepositList;
-use App\Pages\Superadmin\PackageList;
-use App\Pages\Superadmin\WithdrawPay;
-use Illuminate\Support\Facades\Route;
-use App\Pages\Superadmin\MemberHistory;
-use App\Pages\Superadmin\OrderItemList;
-use App\Pages\Superadmin\StatementList;
-use App\Pages\Superadmin\WithdrawalList;
 use App\Pages\Superadmin\AchievementList;
 use App\Pages\Superadmin\BalanceGenerate;
+use App\Pages\Superadmin\BalanceList;
+use App\Pages\Superadmin\Dashboard;
+use App\Pages\Superadmin\DealerList;
+use App\Pages\Superadmin\DepositList;
 use App\Pages\Superadmin\FundAttachmentList;
-use App\Http\Controllers\AdminDatatableController;
+use App\Pages\Superadmin\IncomeList;
+use App\Pages\Superadmin\MemberHistory;
+use App\Pages\Superadmin\MemberList;
+use App\Pages\Superadmin\OrderItemList;
+use App\Pages\Superadmin\OrderList;
+use App\Pages\Superadmin\PackageList;
+use App\Pages\Superadmin\PointList;
+use App\Pages\Superadmin\Settings;
+use App\Pages\Superadmin\StatementList;
+use App\Pages\Superadmin\TicketList;
+use App\Pages\Superadmin\WithdrawalList;
+use App\Pages\Superadmin\WithdrawPay;
+use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.', 'middleware' => ['auth', 'role:superadmin']], function () {
     Route::group(['middleware' => ['role:superadmin']], function () {
@@ -45,7 +44,4 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.', 'middleware' => [
     });
 
     Route::get('withdraw-pay-list', WithdrawPay::class)->name('withdraw_pay');
-
-
-    Route::get('datatable/{table}', [AdminDatatableController::class, 'index'])->name('datatable');
 });

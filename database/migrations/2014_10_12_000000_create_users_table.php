@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -43,6 +44,7 @@ return new class () extends Migration {
             $table->timestamp('birth')->nullable();
             $table->string('profile')->nullable();
             $table->string('note')->nullable();
+            $table->json('additional_settings')->nullable();
             $table->timestamp('is_agree')->nullable();
             $table->timestamp('is_approve')->nullable();
             $table->timestamp('is_banned')->nullable();

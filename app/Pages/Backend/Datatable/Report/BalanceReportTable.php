@@ -1,13 +1,10 @@
 <?php
-
 namespace App\Pages\Backend\Datatable\Report;
 
 use App\Models\Balance;
 use Illuminate\Database\Eloquent\Builder;
-use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Http\Common\LaravelLivewireTables\LinkColumn;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class BalanceReportTable extends DataTableComponent
 {
@@ -20,24 +17,23 @@ class BalanceReportTable extends DataTableComponent
         $this->setPerPageAccepted(perPageRows());
         $this->setTableAttributes([
             'class' => 'table-sm',
-          ]);
+        ]);
         $this->setDefaultSort('id', 'desc');
     }
 
     public function builder(): Builder
     {
-        $Balance =  Balance::query()->with('Parent:id,username');
+        $Balance = Balance::query()->with('Parent:id,username');
 
         $Balance->whereUserId(auth()->id());
 
         return $Balance;
     }
 
-
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")->format(fn() => ++$this->index +  ($this->getPage() - 1) * $this->perPage),
+            Column::make("Id", "id")->format(fn() => ++$this->index + ($this->getPage() - 1) * $this->perPage),
             Column::make("Type", "type")->format(
                 fn($value, $row, Column $column) => $value ? config("status.balance_type.{$value}.name") : 0
             )->searchable()->sortable(),
@@ -46,19 +42,19 @@ class BalanceReportTable extends DataTableComponent
             )->searchable()->sortable(),
             Column::make("Transaction Details", "parent_id")->format(function ($value, $row, Column $column) {
                 if ($row->type == 1 || $row->type == 6) {
-                    if($row->flow == 1) {
+                    if ($row->flow == 1) {
                         return $value ? 'Received from ' . $row->Parent->username : '-';
                     } else {
                         return $value ? 'Sent to ' . $row->Parent->username : '-';
                     }
                 } elseif ($row->type == 2) {
-                    if($row->flow == 1) {
-                        return 'Received from Administrator';
+                    if ($row->flow == 1) {
+                        return 'Received from System';
                     } else {
-                        return 'Sent to Administrator';
+                        return 'Sent to System';
                     }
                 } elseif ($row->type == 5) {
-                    return 'Investment';
+                    return 'Online Shopping';
                 } else {
                     return '-';
                 }

@@ -382,14 +382,14 @@
                                         <span class="side-menu__label text-truncate">Upgrade</span>
                                     </a>
                                 </li> --}}
-                                    {{-- <li class="slide">
-                                    <a class="side-menu__item" href="{{ route('ecommerce.shop') }}">
-                                        <span class="side-menu__icon">
-                                            <i class="fe fe-server" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="side-menu__label text-truncate">Shop</span>
-                                    </a>
-                                </li> --}}
+                                    <li class="slide">
+                                        <a class="side-menu__item" href="{{ route('frontend.shop') }}">
+                                            <span class="side-menu__icon">
+                                                <i class="fe fe-server" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="side-menu__label text-truncate">Shop</span>
+                                        </a>
+                                    </li>
 
                                     {{-- <li class="slide">
                                     <a class="side-menu__item" href="{{ route('ecommerce.dealer_delivery_list') }}">
@@ -494,6 +494,8 @@
                                                     class="slide-item">Category List</a>
                                                 <a href="{{ route('ecommerce.admin.brand_list') }}"
                                                     class="slide-item">Brand List</a>
+                                                <a href="{{ route('ecommerce.admin.slider_list') }}"
+                                                    class="slide-item">Slider List</a>
                                                 <a href="{{ route('ecommerce.admin.dealer_list') }}"
                                                     class="slide-item">Dealer List</a>
                                                 <a href="{{ route('ecommerce.admin.order_delivery_list') }}"

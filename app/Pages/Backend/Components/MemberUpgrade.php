@@ -6,16 +6,16 @@ use App\Models\MemberTree;
 use App\Models\Package;
 use App\Models\Point;
 use App\Models\User;
+use App\Traits\MemberUpgradeTrait;
 use App\Traits\UsernameSearchTrait;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class MemberUpgrade extends Component
 {
     use UsernameSearchTrait;
-    use LivewireAlert;
+    use MemberUpgradeTrait;
 
     public $is_free;
     public $placement_id;
@@ -182,6 +182,8 @@ class MemberUpgrade extends Component
             $MemberTree->package_id = $Package ? $Package->id : null;
             $MemberTree->placement_id = $PlacementMemberTree->user_id;
             $MemberTree->save();
+
+            $this->memberUpgrade($upgradeUser->id);
 
             if (! $this->is_free && $MemberTree->sponsor_id) {
                 // $this->sendSponsorBonus($MemberTree->user_id, $upgradePoint->value, '', $upgradePoint->id);

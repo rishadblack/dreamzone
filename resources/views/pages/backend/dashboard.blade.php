@@ -85,7 +85,16 @@
                         <div class="d-flex justify-content-between mb-3">
                             <div>
                                 <h5 class="main-profile-name">{{ $User->name }}</h5>
-                                <p class="main-profile-name-text">{{ $User->username }}</p>
+                                <p class="main-profile-name-text">{{ $User->username }} (
+                                    @if ($User->memberTree->p_point <= 0)
+                                        DZ Customer
+                                    @elseif ($User->memberTree->p_point >= 100)
+                                        Pro-Uddokta
+                                    @elseif ($User->memberTree->p_point >= 10)
+                                        General Uddokta
+                                    @endif
+                                    )
+                                </p>
                             </div>
                         </div>
                         <h6>Details</h6>
@@ -205,7 +214,7 @@
                                 <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
                                 </div>
                                 <div class="text-center mb-1">
-                                    <h2 class="counter mb-2">{{ pointFormat($TotalAttach, true) }}</h2>
+                                    <h2 class="counter mb-2">{{ pointFormat($User->memberTree->p_point, true) }}</h2>
                                     <h6 class="mb-0">Total Order PV</h6>
                                 </div>
                             </div>

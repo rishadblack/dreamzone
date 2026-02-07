@@ -1,5 +1,4 @@
 <?php
-
 namespace App\View\Components\Search;
 
 use App\Models\Dealer;
@@ -22,6 +21,7 @@ class DealerSearch extends Component
     public function render()
     {
         $dealers = Dealer::active();
+
         if ($this->dealerType) {
             $dealers = $dealers->whereType(2);
         }

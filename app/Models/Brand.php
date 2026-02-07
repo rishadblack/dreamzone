@@ -1,12 +1,12 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Brand extends Model
 {
@@ -15,7 +15,7 @@ class Brand extends Model
 
     protected $guarded = [];
     public $timestamps = true;
-    protected $dates = ['deleted_at'];
+    protected $dates   = ['deleted_at'];
 
     public function scopeActive(Builder $query): mixed
     {
@@ -25,5 +25,10 @@ class Brand extends Model
     public function User(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function Products(): HasMany
+    {
+        return $this->hasMany(Product::class);
     }
 }

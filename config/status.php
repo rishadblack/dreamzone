@@ -37,13 +37,13 @@ return [
             'class' => 'success',
         ],
         5 => [
-            'name' => 'Attachment',
-            'value' => 'attachment',
+            'name' => 'Purchase',
+            'value' => 'purchase',
             'class' => 'success',
         ],
         6 => [
-            'name' => 'Transfer For Attachment',
-            'value' => 'transfer_for_attachment',
+            'name' => 'Transfer For Purchase',
+            'value' => 'transfer_for_purchase',
             'class' => 'success',
         ],
     ],
@@ -349,16 +349,16 @@ return [
         ],
     ],
     'order_payment_method' => [
-        // 1 => [
-        //     'name' => 'Cash On Delivery',
-        //     'value' => 'inactive',
-        //     'class' => 'success',
-        //     'logo' => null,
-        //     'account_no' => null,
-        //     'account_details' => '',
-        // ],
+        1 => [
+            'name' => 'Cash On Delivery',
+            'value' => 'inactive',
+            'class' => 'success',
+            'logo' => null,
+            'account_no' => null,
+            'account_details' => '',
+        ],
         2 => [
-            'name' => 'Fund',
+            'name' => 'Credit',
             'value' => 'inactive',
             'class' => 'success',
             'logo' => null,
