@@ -497,8 +497,8 @@
                                                     class="slide-item">Brand List</a>
                                                 <a href="{{ route('ecommerce.admin.slider_list') }}"
                                                     class="slide-item">Slider List</a>
-                                                <a href="{{ route('ecommerce.admin.dealer_list') }}"
-                                                    class="slide-item">Dealer List</a>
+                                                {{-- <a href="{{ route('ecommerce.admin.dealer_list') }}"
+                                                    class="slide-item">Dealer List</a> --}}
                                                 <a href="{{ route('ecommerce.admin.order_delivery_list') }}"
                                                     class="slide-item">Order Delivery</a>
                                                 <a href="{{ route('ecommerce.admin.inventory_list') }}"
