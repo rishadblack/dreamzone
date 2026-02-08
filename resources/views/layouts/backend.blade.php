@@ -391,14 +391,15 @@
                                         </a>
                                     </li>
 
-                                    {{-- <li class="slide">
-                                    <a class="side-menu__item" href="{{ route('ecommerce.dealer_delivery_list') }}">
-                                        <span class="side-menu__icon">
-                                            <i class="fe fe-server" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="side-menu__label text-truncate">Order Delivery</span>
-                                    </a>
-                                </li> --}}
+                                    <li class="slide">
+                                        <a class="side-menu__item"
+                                            href="{{ route('ecommerce.dealer_delivery_list') }}">
+                                            <span class="side-menu__icon">
+                                                <i class="fe fe-server" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="side-menu__label text-truncate">Order Delivery</span>
+                                        </a>
+                                    </li>
                                     <li class="slide">
                                         <a class="side-menu__item " data-bs-toggle="slide"
                                             href="javascript:void(0);">

@@ -6,8 +6,8 @@ use App\Pages\Login;
 use App\Pages\Register;
 use Illuminate\Support\Facades\Route;
 
-Route::get('login', Login::class)->name('login');
-Route::get('register', Register::class)->name('register');
+Route::get('login', Login::class)->name('login')->middleware('guest');
+Route::get('register', Register::class)->name('register')->middleware('guest');
 Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::group(['prefix' => '/', 'as' => 'frontend.'], function () {

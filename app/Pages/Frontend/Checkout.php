@@ -209,7 +209,7 @@ class Checkout extends Component
         $Point->user_id = $User->id;
         $Point->order_id = $order->id;
         $Point->parent_id = $order->Dealer->user_id;
-        $Point->value = $order->point - $order->re_point;
+        $Point->value = $order->point;
         $Point->type = 1;
         $Point->flow = 1;
         $Point->generated_by = Auth::id();

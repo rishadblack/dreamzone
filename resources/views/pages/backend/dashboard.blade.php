@@ -222,79 +222,27 @@
                     </div>
                 </div>
                 @if (binary_member())
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="card bg-success">
-                            <div class="card-body">
-                                <div class="counter-status md-mb-0">
-                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
-                                    </div>
-                                    <div class="text-center mb-1">
-                                        <h2 class="counter mb-2">{{ numberFormat($User->roi_income, true) }}</h2>
-                                        <h6 class="mb-0">Equal Income</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="card bg-success">
-                            <div class="card-body">
-                                <div class="counter-status md-mb-0">
-                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
-                                    </div>
-                                    <div class="text-center mb-1">
-                                        <h2 class="counter mb-2">{{ numberFormat($User->generation_income, true) }}
-                                        </h2>
-                                        <h6 class="mb-0">Equal Generation</h6>
+                    @foreach (collect(config('mlm.income_list'))->sortBy('sort') as $item)
+                        @hasanyrole($item['middleware'])
+                            <div class="col-xl-3 col-lg-6 col-md-6">
+                                <div class="card bg-success">
+                                    <div class="card-body">
+                                        <div class="counter-status md-mb-0">
+                                            <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                            </div>
+                                            <div class="text-center mb-1">
+                                                <h2 class="counter mb-2">
+                                                    {{ numberFormat($User[$item['name'] . '_income'], true) }}</h2>
+                                                <h6 class="mb-0">{{ $item['title'] }}</h6>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="card bg-success">
-                            <div class="card-body">
-                                <div class="counter-status md-mb-0">
-                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
-                                    </div>
-                                    <div class="text-center mb-1">
-                                        <h2 class="counter mb-2">{{ numberFormat($User->incentive_income, true) }}
-                                        </h2>
-                                        <h6 class="mb-0">Incentives</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="card bg-success">
-                            <div class="card-body">
-                                <div class="counter-status md-mb-0">
-                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
-                                    </div>
-                                    <div class="text-center mb-1">
-                                        <h2 class="counter mb-2">{{ numberFormat($User->roi_income, true) }}</h2>
-                                        <h6 class="mb-0">Sponsor Royalty Income</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="card bg-success">
-                            <div class="card-body">
-                                <div class="counter-status md-mb-0">
-                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
-                                    </div>
-                                    <div class="text-center mb-1">
-                                        <h2 class="counter mb-2">{{ numberFormat($User->generation_income, true) }}
-                                        </h2>
-                                        <h6 class="mb-0">Cash Back Income</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @endhasanyrole
+                    @endforeach
+
+
                     <div class="col-xl-3 col-lg-6 col-md-6">
                         <div class="card bg-info">
                             <div class="card-body">
@@ -340,23 +288,6 @@
                             </div>
                         </div>
                     </div>
-                    @hasanyrole('superadmin|admin|dealer')
-                        <div class="col-xl-3 col-lg-6 col-md-6">
-                            <div class="card bg-warning">
-                                <div class="card-body">
-                                    <div class="counter-status md-mb-0">
-                                        <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
-                                        </div>
-                                        <div class="text-center mb-1">
-                                            <h2 class="counter mb-2">{{ numberFormat($User->generation_income, true) }}
-                                            </h2>
-                                            <h6 class="mb-0">Dealer Income</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endhasanyrole
                 @endif
             </div>
         </div>

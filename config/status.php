@@ -190,12 +190,12 @@ return [
         2 => [
             'name' => 'Pending',
             'value' => 'inactive',
-            'class' => 'success',
+            'class' => 'warning',
         ],
         3 => [
             'name' => 'Canceled',
             'value' => 'inactive',
-            'class' => 'success',
+            'class' => 'danger',
         ],
     ],
     'order_payment_status' => [
@@ -207,12 +207,12 @@ return [
         2 => [
             'name' => 'Due',
             'value' => 'inactive',
-            'class' => 'success',
+            'class' => 'warning',
         ],
         3 => [
             'name' => 'Canceled',
             'value' => 'inactive',
-            'class' => 'success',
+            'class' => 'danger',
         ],
     ],
     'order_delivery_status' => [
