@@ -76,6 +76,12 @@
     <div class="row">
         <div class="col-lg-4">
             <x-card>
+                @if ($User->memberTree->is_cashback)
+                    <span class="badge rounded-pill text-bg-warning px-3 py-2 mb-3">
+                        <i class="bi bi-gift me-1"></i>
+                        Congratulations! You are eligible to Cashback Owner
+                    </span>
+                @endif
                 <div class="ps-0">
                     <div class="main-profile-overview">
                         <div class="main-img-user profile-user">
@@ -200,8 +206,22 @@
                                 <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
                                 </div>
                                 <div class="text-center mb-1">
-                                    <h2 class="counter mb-2">{{ numberFormat($TotalAttach, true) }}</h2>
+                                    <h2 class="counter mb-2">{{ numberFormat($TotalOrder, true) }}</h2>
                                     <h6 class="mb-0">Total Order Amount</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6">
+                    <div class="card bg-danger">
+                        <div class="card-body">
+                            <div class="counter-status md-mb-0">
+                                <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                </div>
+                                <div class="text-center mb-1">
+                                    <h2 class="counter mb-2">{{ numberFormat($TotalOrderDiscount, true) }}</h2>
+                                    <h6 class="mb-0">Total Order Discount</h6>
                                 </div>
                             </div>
                         </div>
@@ -250,7 +270,7 @@
                                         <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
                                         </div>
                                         <div class="text-center mb-1">
-                                            <h2 class="counter mb-2">{{ abs($User->generation_income) }}
+                                            <h2 class="counter mb-2">{{ abs($User->memberTree->total_member) }}
                                             </h2>
                                             <h6 class="mb-0">Total Sales Member</h6>
                                         </div>
@@ -265,7 +285,7 @@
                                         <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
                                         </div>
                                         <div class="text-center mb-1">
-                                            <h2 class="counter mb-2">{{ abs($User->generation_income) }}
+                                            <h2 class="counter mb-2">{{ abs($User->memberTree->l_member) }}
                                             </h2>
                                             <h6 class="mb-0">Sales Point 1</h6>
                                         </div>
@@ -280,7 +300,7 @@
                                         <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
                                         </div>
                                         <div class="text-center mb-1">
-                                            <h2 class="counter mb-2">{{ abs($User->generation_income) }}
+                                            <h2 class="counter mb-2">{{ abs($User->memberTree->r_member) }}
                                             </h2>
                                             <h6 class="mb-0">Sales Point 2</h6>
                                         </div>

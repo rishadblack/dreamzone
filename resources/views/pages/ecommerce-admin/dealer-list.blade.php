@@ -14,6 +14,9 @@
             <h4>Personal Details</h4>
             <div class="row" wire:key="personal">
                 <div class="col-sm-6 col-lg-4">
+                    <x-input.select wire:model="type" label="Type" :options="collect(config('status.dealer_type'))->where('value', '!=', 'office')" />
+                </div>
+                <div class="col-sm-6 col-lg-4">
                     <x-input.text wire:model="name" label="Name" />
                 </div>
                 <div class="col-sm-6 col-lg-4">
@@ -56,13 +59,16 @@
                     <x-input.text wire:model="business_post_code" label="Business Post Code" />
                 </div>
                 <div class="col-sm-6 col-lg-4">
-                    <x-search.divisions wire:model.live="business_division_id" :country_id="$business_country_id" label="Business Division" />
+                    <x-search.divisions wire:model.live="business_division_id" :country_id="$business_country_id"
+                        label="Business Division" />
                 </div>
                 <div class="col-sm-6 col-lg-4">
-                    <x-search.districts wire:model.live="business_district_id" :division_id="$business_division_id" label="Business District" />
+                    <x-search.districts wire:model.live="business_district_id" :division_id="$business_division_id"
+                        label="Business District" />
                 </div>
                 <div class="col-sm-6 col-lg-4">
-                    <x-search.upazilas wire:model.live="business_upazila_id" :district_id="$business_district_id" label="Business Upazila" />
+                    <x-search.upazilas wire:model.live="business_upazila_id" :district_id="$business_district_id"
+                        label="Business Upazila" />
                 </div>
             </div>
             <h4 class="pt-2">Access Details</h4>
@@ -70,12 +76,14 @@
                 <div class="col-sm-6 col-lg-4">
                     <x-input.text wire:model="username" label="Username" />
                 </div>
-                <div class="col-sm-6 col-lg-4">
+                {{-- <div class="col-sm-6 col-lg-4">
                     <x-input.text wire:model="sponsor_username" label="Sponsor Username" />
-                </div>
+                </div> --}}
                 <div class="col-sm-6 col-lg-4">
                     <x-input.text wire:model="password" label="Password" />
                 </div>
+            </div>
+            <div class="row" wire:key="access-check">
                 <div class="col-sm-6 col-lg-4">
                     <x-input.checkbox wire:model="is_office" label="Own Office" />
                 </div>

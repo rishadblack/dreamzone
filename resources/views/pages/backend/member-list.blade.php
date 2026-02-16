@@ -5,7 +5,7 @@
     <x-card>
         <div class="row">
             <div class="col-md-4">
-                <x-input.text wire:model.change="username" label="Search member's account" />
+                <x-input.text wire:model.live.debounce.500ms="username" label="Search member's account" />
             </div>
             @if ($teamMember->placement_id)
                 <div class="col-md-4">
@@ -141,7 +141,7 @@
         }
 
         /*We need to remove left-right connectors from elements without
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    any siblings*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            any siblings*/
 
         .my-tree li:only-child::after,
         .my-tree li:only-child::before {
@@ -155,7 +155,7 @@
         }
 
         /*Remove left connector from first child and
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    right connector from last child*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            right connector from last child*/
 
         .my-tree li:first-child::before,
         .my-tree li:last-child::after {

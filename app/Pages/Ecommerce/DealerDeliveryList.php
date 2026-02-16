@@ -3,6 +3,7 @@ namespace App\Pages\Ecommerce;
 
 use App\Http\Common\Component;
 use App\Models\Dealer;
+use App\Models\Income;
 use App\Models\Order;
 use App\Models\Point;
 use App\Models\User;
@@ -99,18 +100,7 @@ class DealerDeliveryList extends Component
                 $Point->status = $this->delivery_status == 1 ? 1 : 2;
                 $Point->save();
 
-                $PointUpgrade = Point::whereOrderId($this->order->id)->whereType(2)->whereFlow(2)->firstOrNew();
-                $PointUpgrade->user_id = $Point->user_id;
-                $PointUpgrade->parent_id = $Point->parent_id;
-                $PointUpgrade->order_id = $Point->order_id;
-                $PointUpgrade->value = $Point->value;
-                $PointUpgrade->type = 2;
-                $PointUpgrade->flow = 2;
-                $PointUpgrade->generated_by = $CurrentUser->id;
-                $PointUpgrade->status = $this->delivery_status == 1 ? 1 : 2;
-                $PointUpgrade->save();
-
-                $this->memberUpgrade($PointUpgrade->user_id);
+                $this->memberUpgrade($Point->user_id);
             }
 
             if ($this->order->type != 1) {
@@ -144,6 +134,7 @@ class DealerDeliveryList extends Component
     public function orderStatusCheck($order)
     {
         $CurrentUser = Auth::User();
+        $Dealer = Dealer::whereUserId($CurrentUser->id)->first();
 
         if ($order->payment_status == 1 && $order->delivery_status == 1) {
             $order->status = 1;
@@ -153,36 +144,41 @@ class DealerDeliveryList extends Component
 
         $order->save();
 
-        if ($order->payment_method_id != 1 && $CurrentUser->hasRole('dealer') && Dealer::whereUserId($CurrentUser->id)->whereNull('is_office')->exists()) {
-            //dealer Commission
-        }
-
         if ($order->status != 1) {
             return true;
         }
 
         // Dealer Condition
-        if (Auth::User()->hasRole('dealer')) {
-            // $dealerBonusAmount = $order->point * config('mlm.income_list.6.percentage') / 100;
+        if ($CurrentUser->hasRole('dealer') && Dealer::whereUserId($CurrentUser->id)->whereNull('is_office')->exists()) {
 
-            // $generationBonus = $order->re_point * config('mlm.income_list.9.percentage') / 100;
+            $dealerBonusAmount = 0;
 
-            // if ($order->re_point > 0) {
-            //     $this->genarationBonus($order->user_id, $generationBonus, $order->User, $order);
-            // }
+            if ($Dealer->type == 2) {
+                $dealerBonusAmount = $order->point * config('mlm.income_list.9.fixed.1') / 100;
+            } elseif ($Dealer->type == 3) {
+                if (Dealer::whereUserId($order->user_id)->whereType(2)->first()) {
+                    $DepoAmount = config('mlm.income_list.9.fixed.2') - config('mlm.income_list.9.fixed.1');
+                    $dealerBonusAmount = $order->point * $DepoAmount / 100;
+                } else {
+                    $dealerBonusAmount = $order->point * config('mlm.income_list.9.fixed.2') / 100;
+                }
+            }
 
-            // Income::create([
-            //     'user_id' => $order->Dealer->user_id,
-            //     'parent_id' => $order->user_id,
-            //     'order_id' => $order->id,
-            //     'amount' => $dealerBonusAmount,
-            //     'net_amount' => $dealerBonusAmount,
-            //     'wallet_type' => 1,
-            //     'type' => 6,
-            //     'flow' => 1,
-            //     'generated_by' => $order->Dealer->user_id,
-            //     'status' => 1,
-            // ]);
+            if ($dealerBonusAmount > 0) {
+                Income::create([
+                    'user_id' => $order->Dealer->user_id,
+                    'parent_id' => $order->user_id,
+                    'order_id' => $order->id,
+                    'amount' => $dealerBonusAmount,
+                    'net_amount' => $dealerBonusAmount,
+                    'wallet_type' => 1,
+                    'type' => 6,
+                    'flow' => 1,
+                    'generated_by' => $order->Dealer->user_id,
+                    'status' => 1,
+                ]);
+            }
+
         }
     }
 

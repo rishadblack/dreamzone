@@ -16,8 +16,10 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'NexFxt'),
-    'email' => env('APP_EMAIL', 'admin@admin.com'),
+    'name' => env('APP_NAME', 'Dream Zone Agro'),
+    'email' => env('APP_EMAIL', 'dreamzoneagrofood@gmail.com'),
+    'phone' => env('APP_EMAIL', '01955449103'),
+    'address' => env('APP_EMAIL', 'SoniAkhra,Jatrabari, Dhaka, Bangladesh'),
     'logo' => env('APP_LOGO', 'images/logo.png?v=1'),
     'default_profile' => env('APP_DEFAULT_PROFILE', 'images/male-icon.png?v=1'),
     'point_sign' => env('APP_POINT_SIGN', 'DPV'),

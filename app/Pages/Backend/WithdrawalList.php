@@ -1,16 +1,15 @@
 <?php
-
 namespace App\Pages\Backend;
 
-use App\Models\User;
-use App\Models\Income;
-use App\Models\Balance;
 use App\Http\Common\Component;
+use App\Models\Balance;
+use App\Models\Income;
+use App\Models\User;
 use App\Models\Withdrawal;
-use Livewire\Attributes\On;
 use App\Traits\UsernameSearchTrait;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 
 class WithdrawalList extends Component
 {
@@ -28,7 +27,8 @@ class WithdrawalList extends Component
     public $username;
 
     #[On('demandForm')]
-    public function testEvent($data) {}
+    public function testEvent($data)
+    {}
 
     public function updatedType()
     {
@@ -37,7 +37,7 @@ class WithdrawalList extends Component
 
     public function updatedAmount()
     {
-        if ($this->type != 3 && $this->amount > 0) {
+        if ($this->type == 2 && $this->amount > 0) {
             $this->charge = $this->amount * config('mlm.withdraw_charge') / 100;
             $this->net_amount = $this->amount - $this->charge;
         } else {
@@ -77,10 +77,10 @@ class WithdrawalList extends Component
         $User = User::find(Auth::id());
 
         $availableIncome = Income::availableIncome()
-                            ->whereUserId($User->id)
-                            ->whereWalletType(1)
-                            ->whereStatus(1)
-                            ->first()->available_income;
+            ->whereUserId($User->id)
+            ->whereWalletType(1)
+            ->whereStatus(1)
+            ->first()->available_income;
 
         if ($availableIncome < 0) {
             $this->addError('amount', 'You have not enough balance to withdraw');
@@ -94,19 +94,19 @@ class WithdrawalList extends Component
             return true;
         }
 
-        if ($this->amount < config('mlm.minumum_withdraw')) {
+        if ($this->type == 2 && $this->amount < config('mlm.minumum_withdraw')) {
             $this->addError('amount', 'Minimum ' . numberFormat(config('mlm.minumum_withdraw'), true) . ' is required to withdraw');
 
             return true;
         }
 
-        if (!$User->is_approve) {
-            $this->alert('error', 'Your account is not approved yet');
+        // if (! $User->is_approve) {
+        //     $this->alert('error', 'Your account is not approved yet');
 
-            return true;
-        }
+        //     return true;
+        // }
 
-        if (!$User->memberTree->is_premium) {
+        if (! $User->memberTree->is_premium) {
             $this->alert('error', 'Upgrade your account first');
 
             return true;
@@ -129,8 +129,11 @@ class WithdrawalList extends Component
             return true;
         }
 
+        $withdrawalCharge = 0;
 
-        $withdrawalCharge = $this->amount * config('mlm.withdraw_charge') / 100;
+        if ($this->type === 2) {
+            $withdrawalCharge = $this->amount * config('mlm.withdraw_charge') / 100;
+        }
 
         $Withdrawal = new Withdrawal();
         $Withdrawal->user_id = Auth::id();
@@ -190,7 +193,7 @@ class WithdrawalList extends Component
         }
 
         $this->dispatch('modalClose', 'WithdrawalModal');
-        $this->dispatch('refreshdatatable');
+        $this->dispatch('refreshDatatable');
         $this->alert('success', 'Your withdrawal request has been sent successfully');
         $this->reset();
     }
@@ -199,10 +202,10 @@ class WithdrawalList extends Component
     {
         $User = Auth::user();
         $availableIncome = Income::availableIncome()
-                                ->whereUserId($User->id)
-                                ->whereWalletType(1)
-                                ->whereStatus(1)
-                                ->first();
+            ->whereUserId($User->id)
+            ->whereWalletType(1)
+            ->whereStatus(1)
+            ->first();
         return view('pages.backend.withdrawal-list', [
             'user' => $User,
             'available_income' => $availableIncome,

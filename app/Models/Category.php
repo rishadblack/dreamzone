@@ -15,7 +15,6 @@ class Category extends Model
 
     protected $guarded = [];
     public $timestamps = true;
-    protected $dates   = ['deleted_at'];
 
     public function scopeActive(Builder $query): mixed
     {

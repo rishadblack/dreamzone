@@ -55,7 +55,7 @@ class OrderTable extends DataTableComponent
                 ->searchable(),
             Column::make('Total Point', 'point')
                 ->format(
-                    fn($value, $row, Column $column) => $value ? numberFormat($value, true) : 0
+                    fn($value, $row, Column $column) => $value ? pointFormat($value, true) : 0
                 )
                 ->sortable()
                 ->searchable(),

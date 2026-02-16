@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Balance extends Model
 {
@@ -16,14 +15,13 @@ class Balance extends Model
 
     protected $guarded = [];
     public $timestamps = true;
-    protected $dates = ['deleted_at'];
 
     public function User(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function Parent(): BelongsTo
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(User::class, 'parent_id');
     }

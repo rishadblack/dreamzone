@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -16,6 +17,7 @@ return new class () extends Migration {
             $table->foreignId('sponsor_id')->nullable();
             $table->foreignId('placement_id')->nullable();
             $table->foreignId('incentive_id')->nullable();
+            $table->foreignId('step_id')->nullable();
             $table->foreignId('l_id')->nullable();
             $table->foreignId('c_id')->nullable();
             $table->foreignId('r_id')->nullable();
@@ -41,6 +43,7 @@ return new class () extends Migration {
             $table->timestamp('is_premium')->nullable();
             $table->timestamp('is_valid')->nullable();
             $table->timestamp('is_founder')->nullable();
+            $table->timestamp('is_cashback')->nullable();
             $table->json('details')->nullable();
             $table->foreignId('package_id')->nullable();
             $table->timestamps();

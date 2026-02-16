@@ -384,14 +384,16 @@
                                         <span class="side-menu__label text-truncate">Upgrade</span>
                                     </a>
                                 </li> --}}
-                                    <li class="slide">
-                                        <a class="side-menu__item" href="{{ route('frontend.shop') }}">
-                                            <span class="side-menu__icon">
-                                                <i class="fe fe-server" aria-hidden="true"></i>
-                                            </span>
-                                            <span class="side-menu__label text-truncate">Shop</span>
-                                        </a>
-                                    </li>
+                                @endif
+                                <li class="slide">
+                                    <a class="side-menu__item" href="{{ route('frontend.shop') }}">
+                                        <span class="side-menu__icon">
+                                            <i class="fe fe-server" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="side-menu__label text-truncate">Shop</span>
+                                    </a>
+                                </li>
+                                @if (binary_member())
 
 
                                     <li class="slide">

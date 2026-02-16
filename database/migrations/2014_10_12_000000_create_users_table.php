@@ -50,6 +50,7 @@ return new class() extends Migration
             $table->timestamp('is_banned')->nullable();
             $table->timestamp('is_not_transferable')->nullable();
             $table->timestamp('is_not_withdrawalable')->nullable();
+            $table->timestamp('is_hide_tree')->nullable();
             $table->decimal('free_upgrade', 20, 2)->nullable();
             $table->decimal('sms_balance', 20, 2)->nullable();
             $table->uuid('uuid')->nullable();

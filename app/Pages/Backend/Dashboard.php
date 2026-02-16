@@ -3,9 +3,9 @@ namespace App\Pages\Backend;
 
 use App\Http\Common\Component;
 use App\Models\Balance;
-use App\Models\Fund;
 use App\Models\Income;
 use App\Models\MemberTree;
+use App\Models\Order;
 use App\Models\Point;
 use App\Models\User;
 use App\Models\Withdrawal;
@@ -37,8 +37,8 @@ class Dashboard extends Component
         $Income = Income::availableIncome()->whereUserId(Auth::id())->whereWalletType(1)->whereStatus(1)->first();
         $TotalIncome = Income::whereFlow(1)->whereUserId(Auth::id())->whereWalletType(1)->sum('amount');
         $TotalWithdrawal = Withdrawal::whereUserId(Auth::id())->whereStatus(1)->sum('amount');
-        $TotalAttach = Fund::whereUserId(Auth::id())->whereNotNull('is_attached')->whereNull('is_detached_request')->whereStatus(1)->sum('attached_amount');
-
+        $TotalOrder = Order::whereUserId(Auth::id())->wherePaymentStatus(1)->sum('net_amount');
+        $TotalOrderDiscount = Order::whereUserId(Auth::id())->wherePaymentStatus(1)->sum('discount_amount');
         $TotalSponsor = MemberTree::whereSponsorId(Auth::id())->count();
 
         return view('pages.backend.dashboard', [
@@ -49,7 +49,8 @@ class Dashboard extends Component
             'TotalIncome' => $TotalIncome,
             'TotalWithdrawal' => $TotalWithdrawal,
             'TotalSponsor' => $TotalSponsor,
-            'TotalAttach' => $TotalAttach,
+            'TotalOrder' => $TotalOrder,
+            'TotalOrderDiscount' => $TotalOrderDiscount,
         ]);
     }
 }

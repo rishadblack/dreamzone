@@ -2,6 +2,7 @@
 namespace App\Pages\EcommerceAdmin;
 
 use App\Http\Common\Component;
+use App\Models\Dealer;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -14,7 +15,7 @@ class DealerList extends Component
     use LivewireAlert;
 
     public $user_id;
-    public $member_type;
+    public $type;
 
     public $name;
     public $email;
@@ -80,7 +81,7 @@ class DealerList extends Component
             $this->sponsor_username = $User->memberTree->bySponsor ? $User->memberTree->bySponsor->username : null;
 
             $Dealer = $User->Dealer()->first();
-
+            $this->type = $Dealer->type;
             $this->business_name = $Dealer->business_name;
             $this->business_email = $Dealer->email;
             $this->business_mobile = $Dealer->mobile;
@@ -165,6 +166,7 @@ class DealerList extends Component
         $memberTree->save();
 
         $Dealer = $User->Dealer()->firstOrNew();
+        $Dealer->type = $this->type;
         $Dealer->business_name = $this->business_name;
         $Dealer->email = $this->business_email;
         $Dealer->mobile = $this->business_mobile;
@@ -174,6 +176,11 @@ class DealerList extends Component
         $Dealer->upazila_id = $this->business_upazila_id;
         $Dealer->country_id = $this->business_country_id;
         $Dealer->post_code = $this->business_post_code;
+
+        if ($this->is_office && ! $Dealer->is_office) {
+            Dealer::whereNotNull('is_office')->update(['is_office' => null]);
+        }
+
         $Dealer->is_office = $this->is_office ? true : null;
         $Dealer->save();
 

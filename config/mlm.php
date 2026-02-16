@@ -7,10 +7,10 @@ return [
     'minumum_deposit' => 100,
     'maximum_deposit' => 500000,
     'matching_point' => null,
-    'matching_flash_point' => null,
-    'minimum_matching_point_l' => null,
-    'minimum_matching_point_r' => null,
-    'premium_point' => null,
+    'matching_flash_point' => 8000,
+    'minimum_matching_point_l' => 10,
+    'minimum_matching_point_r' => 10,
+    'premium_point' => 100,
     'minimum_attach' => 25,
     'return_charge' => 40,
 
@@ -54,8 +54,7 @@ return [
         5 => [
             'title' => 'Cash Back Income',
             'name' => 'cashback',
-            'percentage' => 0,
-            'fixed' => 200,
+            'percentage' => 200,
             'delivery' => 'monthly',
             'income_type' => 5,
             'sort' => 2,
@@ -65,7 +64,6 @@ return [
             'title' => 'AGM Club Income',
             'name' => 'agm_club',
             'percentage' => 0,
-            'fixed' => 200,
             'delivery' => 'monthly',
             'income_type' => 6,
             'sort' => 6,
@@ -75,7 +73,6 @@ return [
             'title' => 'Car Fund Income',
             'name' => 'car_fund',
             'percentage' => 0,
-            'fixed' => 200,
             'delivery' => 'monthly',
             'income_type' => 7,
             'sort' => 7,
@@ -85,7 +82,6 @@ return [
             'title' => 'Yearly Pension Income',
             'name' => 'yearly_pension',
             'percentage' => 0,
-            'fixed' => 200,
             'delivery' => 'monthly',
             'income_type' => 8,
             'sort' => 8,
@@ -96,8 +92,8 @@ return [
             'name' => 'dealer',
             'percentage' => 60,
             'fixed' => [
-                1 => 300,
-                2 => 200,
+                1 => 200,
+                2 => 300,
             ],
             'delivery' => 'instant',
             'income_type' => 9,
@@ -109,7 +105,7 @@ return [
         1 => [
             'title' => '1st Level',
             'name' => 'generation',
-            'percentage' => 25,
+            'percentage' => 5,
             'condition' => 0,
             'delivery' => 'instant',
             'income_type' => 4,
@@ -117,7 +113,7 @@ return [
         2 => [
             'title' => '2nd Level',
             'name' => 'generation',
-            'percentage' => 20,
+            'percentage' => 2.5,
             'condition' => 3,
             'delivery' => 'instant',
             'income_type' => 4,
@@ -125,83 +121,14 @@ return [
         3 => [
             'title' => '3rd Level',
             'name' => 'generation',
-            'percentage' => 15,
+            'percentage' => 2.5,
             'condition' => 3,
-            'delivery' => 'instant',
-            'income_type' => 4,
-        ],
-        4 => [
-            'title' => '4th Level',
-            'name' => 'generation',
-            'percentage' => 10,
-            'condition' => 3,
-            'delivery' => 'instant',
-            'income_type' => 4,
-        ],
-        5 => [
-            'title' => '5th Level',
-            'name' => 'generation',
-            'percentage' => 8,
-            'condition' => 6,
-            'delivery' => 'instant',
-            'income_type' => 4,
-        ],
-        6 => [
-            'title' => '6th Level',
-            'name' => 'generation',
-            'percentage' => 6,
-            'condition' => 6,
-            'delivery' => 'instant',
-            'income_type' => 4,
-        ],
-        7 => [
-            'title' => '7th Level',
-            'name' => 'generation',
-            'percentage' => 4,
-            'condition' => 6,
-            'delivery' => 'instant',
-            'income_type' => 4,
-        ],
-        8 => [
-            'title' => '8th Level',
-            'name' => 'generation',
-            'percentage' => 4,
-            'condition' => 9,
-            'delivery' => 'instant',
-            'income_type' => 4,
-        ],
-        9 => [
-            'title' => '9th Level',
-            'name' => 'generation',
-            'percentage' => 4,
-            'condition' => 9,
-            'delivery' => 'instant',
-            'income_type' => 4,
-        ],
-        10 => [
-            'title' => '10th Level',
-            'name' => 'generation',
-            'percentage' => 4,
-            'condition' => 9,
             'delivery' => 'instant',
             'income_type' => 4,
         ],
     ],
     'incentives' => [
         1 => [
-            'title' => 'FA',
-            'name' => 'FA',
-            'percentage' => 10,
-            'capping' => null,
-            'condition_type' => null,
-            'condition_count' => null,
-            'condition_amount' => 5000,
-            'amount' => 0,
-            'sponsor_condition' => 3,
-            'self_attached' => 500,
-            'capping_percentage' => null,
-        ],
-        2 => [
             'title' => 'Team In-charge',
             'name' => 'TI',
             'percentage' => null,
@@ -215,7 +142,7 @@ return [
             'self_attached' => null,
             'capping_percentage' => null,
         ],
-        3 => [
+        2 => [
             'title' => 'Impact Leader',
             'name' => 'IL',
             'percentage' => null,
@@ -229,7 +156,7 @@ return [
             'self_attached' => null,
             'capping_percentage' => null,
         ],
-        4 => [
+        3 => [
             'title' => 'Executive Officer',
             'name' => 'EO',
             'percentage' => null,
@@ -243,7 +170,7 @@ return [
             'self_attached' => null,
             'capping_percentage' => null,
         ],
-        5 => [
+        4 => [
             'title' => 'Assistant Manager',
             'name' => 'AM',
             'percentage' => null,
@@ -257,7 +184,7 @@ return [
             'self_attached' => null,
             'capping_percentage' => null,
         ],
-        6 => [
+        5 => [
             'title' => 'Marketing Manager',
             'name' => 'MM',
             'percentage' => null,
@@ -271,7 +198,7 @@ return [
             'self_attached' => null,
             'capping_percentage' => null,
         ],
-        7 => [
+        6 => [
             'title' => 'Senior Manager',
             'name' => 'SM',
             'percentage' => null,
@@ -285,7 +212,7 @@ return [
             'self_attached' => null,
             'capping_percentage' => null,
         ],
-        8 => [
+        7 => [
             'title' => 'Assistant General Manager',
             'name' => 'AGM',
             'percentage' => null,
@@ -299,12 +226,12 @@ return [
             'self_attached' => null,
             'capping_percentage' => null,
         ],
-        9 => [
+        8 => [
             'title' => 'Deputy General Manager',
             'name' => 'DGM',
             'percentage' => null,
             'capping' => null,
-            'condition_type' => 8,
+            'condition_type' => 7,
             'condition_l' => 5,
             'condition_r' => 4,
             'condition_amount' => null,
@@ -313,12 +240,12 @@ return [
             'self_attached' => null,
             'capping_percentage' => null,
         ],
-        10 => [
+        9 => [
             'title' => 'General Manager',
             'name' => 'GM',
             'percentage' => null,
             'capping' => null,
-            'condition_type' => 9,
+            'condition_type' => 8,
             'condition_l' => 3,
             'condition_r' => 2,
             'condition_amount' => null,
@@ -327,12 +254,12 @@ return [
             'self_attached' => null,
             'capping_percentage' => null,
         ],
-        11 => [
+        10 => [
             'title' => 'Executive Director',
             'name' => 'ED',
             'percentage' => null,
             'capping' => null,
-            'condition_type' => 10,
+            'condition_type' => 9,
             'condition_l' => 2,
             'condition_r' => 1,
             'condition_amount' => null,

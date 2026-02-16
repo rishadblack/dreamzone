@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
@@ -21,6 +20,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('member:statement')->daily();
         $schedule->command('return:statement')->daily();
         $schedule->command('backup:run --only-db --only-to-disk=google')->daily();
+        $schedule->command('cashback:statement')->daily();
     }
 
     /**

@@ -1,24 +1,26 @@
 <?php
-
 namespace App\Models;
 
-use App\Models\Board;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Traits\PointTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MemberTree extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use PointTrait;
 
     protected $guarded = [];
     public $timestamps = true;
-    protected $dates = ['deleted_at'];
-    protected $casts = [
+    protected $casts   = [
         'is_premium' => 'datetime',
+        'is_valid' => 'datetime',
+        'is_founder' => 'datetime',
+        'is_cashback' => 'datetime',
     ];
 
     public function User()
@@ -26,7 +28,7 @@ class MemberTree extends Model
         return $this->belongsTo(User::class);
     }
 
-     public function Dealer()
+    public function Dealer()
     {
         return $this->belongsTo(Dealer::class, 'user_id', 'user_id');
     }
@@ -64,5 +66,10 @@ class MemberTree extends Model
     public function Package(): BelongsTo
     {
         return $this->belongsTo(Package::class)->withDefault();
+    }
+
+    public function Point(): BelongsTo
+    {
+        return $this->belongsTo(Point::class, 'user_id', 'user_id');
     }
 }

@@ -150,17 +150,7 @@ class MemberUpgrade extends Component
 
         try {
             DB::beginTransaction();
-            if (! $this->is_free) {
-                $upgradePoint = new Point();
-                $upgradePoint->user_id = $upgradeUser->id;
-                $upgradePoint->parent_id = $User->id;
-                $upgradePoint->value = $this->value;
-                $upgradePoint->type = 2;
-                $upgradePoint->flow = 2;
-                $upgradePoint->generated_by = $User->id;
-                $upgradePoint->status = 1;
-                $upgradePoint->save();
-            } else {
+            if ($this->is_free) {
                 $User->free_upgrade = $User->id !== 1 ? $User->free_upgrade - 1 : $User->free_upgrade;
                 $User->save();
             }
@@ -185,9 +175,6 @@ class MemberUpgrade extends Component
 
             $this->memberUpgrade($upgradeUser->id);
 
-            if (! $this->is_free && $MemberTree->sponsor_id) {
-                // $this->sendSponsorBonus($MemberTree->user_id, $upgradePoint->value, '', $upgradePoint->id);
-            }
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();

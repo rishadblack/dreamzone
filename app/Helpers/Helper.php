@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Nwidart\Modules\Facades\Module;
 
+if (! function_exists('incomeGenerateCondition')) {
+    function incomeGenerateCondition($UserId)
+    {
+        return MemberTree::whereUserId($UserId)->whereNotNull('is_premium')->where('p_point', '>=', 100)->exists();
+    }
+}
+
 if (! function_exists('binary_member')) {
     function binary_member()
     {

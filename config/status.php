@@ -255,7 +255,7 @@ return [
             'value' => 'home',
             'class' => 'success',
         ],
-        2 => [
+        3 => [
             'name' => 'Depo',
             'value' => 'depo',
             'class' => 'success',

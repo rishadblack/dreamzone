@@ -35,20 +35,18 @@
                                     <div class="col-md-6">
                                         <x-input.select wire:model.lazy="type" label="Delivery Type" :options="config('status.order_type')" />
                                     </div>
+                                    @if ($dealer)
+                                        <div class="col-md-6 @if ($type == 1) d-none @endif">
+                                            {{ $dealer->business_name }} ,<br />
+                                            Mobile : {{ $dealer->User->mobile }} ,<br />
+                                            Address : {{ $dealer->User->address }}
+                                        </div>
+                                    @endif
                                     <div class="col-md-12 @if ($type != 3) d-none @endif">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <x-search.dealer-search wire:model.lazy="dealer_id"
-                                                    label="{{ config('mlm.dealer_name') }}" />
+                                                <x-search.dealer-search wire:model.lazy="dealer_id" label="Dealers" />
                                             </div>
-                                            @if ($dealer)
-                                                <div class="col-md-6">
-                                                    Name : {{ $dealer->User->name }} ,<br />
-                                                    Company Name : {{ $dealer->dealer_name }} ,<br />
-                                                    Mobile : {{ $dealer->User->mobile }} ,<br />
-                                                    Address : {{ $dealer->User->address }}
-                                                </div>
-                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-12 @if ($type != 1) d-none @endif">

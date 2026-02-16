@@ -64,16 +64,19 @@
                 <div class="header-content">
                     <div class="header-media-group">
                         <button class="header-user">
-                            <img src="{{ asset_logo() }}" alt="user">
+                            <span class="fas fa-list"></span>
                         </button>
                         <a href="{{ config('app.url') }}"><img src="{{ asset_logo() }}" alt="logo"></a>
                         <button class="header-src"><i class="fas fa-search"></i></button>
                     </div>
-                    <a href="{{ config('app.url') }}" class="header-logo"> <img src="{{ asset_logo() }}"
-                            alt="logo"></a>
+                    <a href="{{ config('app.url') }}" class="header-logo">
+                        <img src="{{ asset_logo() }}" alt="logo">
+                    </a>
                     @auth
-                        <a href="{{ route('backend.dashboard') }}" class="header-widget" title="My Account"><img
-                                src="{{ asset('frontend/images/user.png') }}" alt="user"><span>Dashboard</span></a>
+                        <a href="{{ route('backend.dashboard') }}" class="header-widget" title="My Account">
+                            {{-- <img
+                                src="{{ asset('frontend/images/user.png') }}" alt="user"> --}}
+                            <span>Dashboard</span></a>
                     @endauth
                     <form class="header-form">
                         <input type="text" placeholder="Search anything...">

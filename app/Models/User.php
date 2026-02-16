@@ -51,6 +51,7 @@ class User extends Authenticatable
         'is_approve' => 'datetime',
         'is_banned' => 'datetime',
         'additional_settings' => 'array',
+        'is_hide_tree' => 'datetime',
     ];
 
     public function Balance(): HasMany

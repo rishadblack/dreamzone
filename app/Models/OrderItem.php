@@ -13,7 +13,6 @@ class OrderItem extends Model
 
     protected $guarded = [];
     public $timestamps = true;
-    protected $dates   = ['deleted_at'];
 
     public function User(): BelongsTo
     {
