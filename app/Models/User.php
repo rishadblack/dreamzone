@@ -122,4 +122,19 @@ class User extends Authenticatable
             }], 'net_amount');
         }
     }
+
+    public function getDesignationAttribute()
+    {
+        if ($this->hasRole('superadmin')) {
+            return 'Super Admin';
+        } elseif ($this->hasRole('dealer')) {
+            return config('status.dealer_type.' . $this->Dealer->type . '.name');
+        } elseif ($this->memberTree->p_point <= 0) {
+            return 'DZ Customer';
+        } elseif ($this->memberTree->p_point >= 100) {
+            return 'Pro - Uddokta';
+        } elseif ($this->memberTree->p_point >= 10) {
+            return 'General Uddokta';
+        }
+    }
 }

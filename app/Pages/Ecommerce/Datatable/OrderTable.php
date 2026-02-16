@@ -24,7 +24,11 @@ class OrderTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        return Order::query(); // Select some things
+        $Order = Order::query(); // Select some things
+
+        $Order->whereUserId(auth()->id());
+
+        return $Order;
     }
 
     public function columns(): array

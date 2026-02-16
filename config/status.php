@@ -251,8 +251,13 @@ return [
             'class' => 'success',
         ],
         2 => [
-            'name' => 'Dealer',
-            'value' => 'dealer',
+            'name' => 'Home Shop',
+            'value' => 'home',
+            'class' => 'success',
+        ],
+        2 => [
+            'name' => 'Depo',
+            'value' => 'depo',
             'class' => 'success',
         ],
     ],

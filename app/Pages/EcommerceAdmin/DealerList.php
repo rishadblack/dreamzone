@@ -1,12 +1,12 @@
 <?php
 namespace App\Pages\EcommerceAdmin;
 
-use App\Models\User;
 use App\Http\Common\Component;
-use Livewire\Attributes\On;
-use Livewire\WithFileUploads;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
 
 class DealerList extends Component
 {
@@ -45,7 +45,6 @@ class DealerList extends Component
     public $is_founder;
     public $is_office;
 
-
     #[On('openDealerModal')]
     public function openDealerModal($data = null)
     {
@@ -55,13 +54,13 @@ class DealerList extends Component
             $this->editDealer($data['id']);
         }
 
-         $this->dispatch('modalOpen', 'DealerModal');
+        $this->dispatch('modalOpen', 'DealerModal');
 
     }
 
     public function editDealer($id)
     {
-        $User = User::with(['memberTree.bySponsor','Dealer'])->find($id);
+        $User = User::with(['memberTree.bySponsor', 'Dealer'])->find($id);
         if ($User) {
             $this->user_id = $User->id;
             $this->name = $User->name;
@@ -95,28 +94,26 @@ class DealerList extends Component
         }
     }
 
-
-
     public function storeDealer()
     {
         $this->validate([
             'sponsor_username' => ['nullable', 'exists:users,username'],
             'username' => [
                 'required',
-                    function ($attribute, $value, $fail) {
-                        if (User::where('id', '!=', $this->user_id)->whereUsername($value)->exists()) {
-                            $fail('The ' . $attribute . ' is already exists.');
-                        }
-                    },
-                ],
+                function ($attribute, $value, $fail) {
+                    if (User::where('id', '!=', $this->user_id)->whereUsername($value)->exists()) {
+                        $fail('The ' . $attribute . ' is already exists.');
+                    }
+                },
+            ],
         ]);
 
         $SponsorUser = User::whereUsername($this->sponsor_username)->first();
 
         $User = User::findOrNew($this->user_id);
-        if($this->user_id){
+        if ($this->user_id) {
             $messages = 'Dealer updated successfully';
-        }else{
+        } else {
             $messages = 'Dealer registration successfully';
         }
 
@@ -133,25 +130,25 @@ class DealerList extends Component
 
         if ($this->is_banned) {
             $User->is_banned = $User->is_banned ? $User->is_banned : now();
-        } elseif (!$this->is_banned) {
+        } elseif (! $this->is_banned) {
             $User->is_banned = null;
         }
 
         if ($this->is_approve) {
             $User->is_approve = $User->is_approve ? $User->is_approve : now();
-        } elseif (!$this->is_approve) {
+        } elseif (! $this->is_approve) {
             $User->is_approve = null;
         }
 
         if ($this->is_not_transferable) {
             $User->is_not_transferable = $User->is_not_transferable ? $User->is_not_transferable : now();
-        } elseif (!$this->is_not_transferable) {
+        } elseif (! $this->is_not_transferable) {
             $User->is_not_transferable = null;
         }
 
         if ($this->is_not_withdrawalable) {
             $User->is_not_withdrawalable = $User->is_not_withdrawalable ? $User->is_not_withdrawalable : now();
-        } elseif (!$this->is_not_withdrawalable) {
+        } elseif (! $this->is_not_withdrawalable) {
             $User->is_not_withdrawalable = null;
         }
 
@@ -160,6 +157,8 @@ class DealerList extends Component
         }
 
         $User->save();
+
+        $User->assignRole('dealer');
 
         $memberTree = $User->memberTree()->firstOrNew();
         $memberTree->sponsor_id = $this->sponsor_username ? $SponsorUser->id : null;

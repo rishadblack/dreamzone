@@ -358,14 +358,16 @@
                                             <span class="side-menu__label text-truncate">Topup</span>
                                         </a>
                                     </li>
-                                    <li class="slide">
-                                        <a class="side-menu__item" href="{{ route('backend.member_list') }}">
-                                            <span class="side-menu__icon">
-                                                <i class="fe fe-users" aria-hidden="true"></i>
-                                            </span>
-                                            <span class="side-menu__label text-truncate">My Team</span>
-                                        </a>
-                                    </li>
+                                    @hasanyrole('superadmin|admin|user')
+                                        <li class="slide">
+                                            <a class="side-menu__item" href="{{ route('backend.member_list') }}">
+                                                <span class="side-menu__icon">
+                                                    <i class="fe fe-users" aria-hidden="true"></i>
+                                                </span>
+                                                <span class="side-menu__label text-truncate">My Team</span>
+                                            </a>
+                                        </li>
+                                    @endhasanyrole
                                     {{-- <li class="slide">
                                     <a class="side-menu__item" href="{{ route('backend.package_list') }}">
                                         <span class="side-menu__icon">
@@ -391,15 +393,7 @@
                                         </a>
                                     </li>
 
-                                    <li class="slide">
-                                        <a class="side-menu__item"
-                                            href="{{ route('ecommerce.dealer_delivery_list') }}">
-                                            <span class="side-menu__icon">
-                                                <i class="fe fe-server" aria-hidden="true"></i>
-                                            </span>
-                                            <span class="side-menu__label text-truncate">Order Delivery</span>
-                                        </a>
-                                    </li>
+
                                     <li class="slide">
                                         <a class="side-menu__item " data-bs-toggle="slide"
                                             href="javascript:void(0);">
@@ -411,28 +405,38 @@
                                         </a>
                                         <ul class="slide-menu">
                                             <li>
-                                                <a class="slide-item" href="{{ route('backend.report.sponsor') }}">
-                                                    Refer
-                                                    List</a>
+                                                @hasanyrole('superadmin|admin|user')
+                                                    <a class="slide-item"
+                                                        href="{{ route('backend.report.sponsor_history') }}">
+                                                        Refer
+                                                        List</a>
+                                                @endhasanyrole
                                                 <a class="slide-item"
-                                                    href="{{ route('backend.report.sponsor_income') }}">
-                                                    Refer Commission</a>
-                                                <a class="slide-item"
-                                                    href="{{ route('backend.report.generation_income') }}">
-                                                    Team Commission</a>
-                                                <a class="slide-item"
-                                                    href="{{ route('backend.report.roi_income') }}">
-                                                    Honorarium</a>
-                                                <a class="slide-item"
-                                                    href="{{ route('backend.report.incentive_income') }}">
-                                                    Incentives</a>
-                                                <a class="slide-item" href="{{ route('backend.report.balance') }}">
-                                                    Balance List
+                                                    href="{{ route('backend.report.balance_history') }}">
+                                                    Balance History
                                                 </a>
+                                                @foreach (collect(config('mlm.income_list'))->sortBy('sort') as $item)
+                                                    @hasanyrole($item['middleware'])
+                                                        <a class="slide-item"
+                                                            href="{{ route('backend.report.' . $item['name']) }}">
+                                                            {{ $item['title'] }}
+                                                        </a>
+                                                    @endhasanyrole
+                                                @endforeach
                                             </li>
                                         </ul>
                                     </li>
                                 @endif
+                                @hasanyrole('superadmin|admin|manager|dealer')
+                                    <li class="slide">
+                                        <a class="side-menu__item" href="{{ route('ecommerce.dealer_delivery_list') }}">
+                                            <span class="side-menu__icon">
+                                                <i class="fe fe-server" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="side-menu__label text-truncate">Order Delivery</span>
+                                        </a>
+                                    </li>
+                                @endhasanyrole
                                 @hasanyrole('superadmin|admin|manager')
                                     <li class="slide">
                                         <a class="side-menu__item " data-bs-toggle="slide" href="javascript:void(0);">
@@ -497,8 +501,8 @@
                                                     class="slide-item">Brand List</a>
                                                 <a href="{{ route('ecommerce.admin.slider_list') }}"
                                                     class="slide-item">Slider List</a>
-                                                {{-- <a href="{{ route('ecommerce.admin.dealer_list') }}"
-                                                    class="slide-item">Dealer List</a> --}}
+                                                <a href="{{ route('ecommerce.admin.dealer_list') }}"
+                                                    class="slide-item">Dealer List</a>
                                                 <a href="{{ route('ecommerce.admin.order_delivery_list') }}"
                                                     class="slide-item">Order Delivery</a>
                                                 <a href="{{ route('ecommerce.admin.inventory_list') }}"

@@ -13,6 +13,10 @@ if (! function_exists('binary_member')) {
 
         $User = Auth::user();
 
+        if ($User->hasRole('dealer')) {
+            return true;
+        }
+
         if ($User->id == 1) {
             return true;
         }

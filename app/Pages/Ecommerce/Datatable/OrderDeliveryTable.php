@@ -4,6 +4,7 @@ namespace App\Pages\Ecommerce\Datatable;
 use App\Http\Common\LaravelLivewireTables\LinkColumn;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
@@ -24,7 +25,15 @@ class OrderDeliveryTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        return Order::query(); // Select some things
+        $User = Auth::user();
+
+        $Order = Order::query(); // Select some things
+
+        if ($User->hasRole('dealer')) {
+            $Order->whereDealerId($User->Dealer->id);
+        }
+
+        return $Order;
     }
 
     public function columns(): array

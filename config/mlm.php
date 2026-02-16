@@ -93,7 +93,7 @@ return [
         ],
         9 => [
             'title' => 'Dealer Income',
-            'name' => 'generation',
+            'name' => 'dealer',
             'percentage' => 60,
             'fixed' => [
                 1 => 300,
@@ -102,7 +102,7 @@ return [
             'delivery' => 'instant',
             'income_type' => 9,
             'sort' => 9,
-            'middleware' => 'superadmin|admin|dealer',
+            'middleware' => 'superadmin|admin|manager|dealer',
         ],
     ],
     'generation_income_list' => [

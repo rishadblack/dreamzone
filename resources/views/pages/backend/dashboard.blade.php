@@ -85,15 +85,8 @@
                         <div class="d-flex justify-content-between mb-3">
                             <div>
                                 <h5 class="main-profile-name">{{ $User->name }}</h5>
-                                <p class="main-profile-name-text">{{ $User->username }} (
-                                    @if ($User->memberTree->p_point <= 0)
-                                        DZ Customer
-                                    @elseif ($User->memberTree->p_point >= 100)
-                                        Pro-Uddokta
-                                    @elseif ($User->memberTree->p_point >= 10)
-                                        General Uddokta
-                                    @endif
-                                    )
+                                <p class="main-profile-name-text">{{ $User->username }}
+                                    ( {{ $User->designation }})
                                 </p>
                             </div>
                         </div>
@@ -128,71 +121,78 @@
                             </div>
                         </div>
                         @if (binary_member())
-                            <h6 class="my-3">Account Details</h6>
-                            <div class="main-profile-social-list">
-                                <div class="media">
-                                    <div class="media-icon bg-primary text-primary">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
+                            @hasanyrole('superadmin|admin|user')
+                                <h6 class="my-3">Account Details</h6>
+                                <div class="main-profile-social-list">
+                                    <div class="media">
+                                        <div class="media-icon bg-primary text-primary">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <span>Refer By</span>
+                                            <a class="refer-element"
+                                                href="javascript:void(0);">{{ $User->memberTree->sponsor_id ? $User->memberTree->bySponsor->username : 'System' }}</a>
+                                        </div>
                                     </div>
-                                    <div class="media-body">
-                                        <span>Refer By</span>
-                                        <a class="refer-element"
-                                            href="javascript:void(0);">{{ $User->memberTree->sponsor_id ? $User->memberTree->bySponsor->username : 'System' }}</a>
+
+                                    <div class="media">
+                                        <div class="media-icon bg-success text-success">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <span>Placement By</span> <a
+                                                href="javascript:void(0);">{{ $User->memberTree->placement_id ? $User->memberTree->byPlacement->username : 'System' }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="media-icon bg-info text-info">
+                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <span>Activation Date</span> <a
+                                                href="javascript:void(0);">{{ $User->memberTree->is_premium ? $User->memberTree->is_premium->format('d-M-Y') : 'Not Active' }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="media-icon bg-danger text-danger">
+                                            <i class="ri-link-unlink-m"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <span>Achievement</span> <a
+                                                href="javascript:void(0);">{{ $User->memberTree->incentive_id ? config('mlm.incentives.' . $User->memberTree->incentive_id . '.title') : 'Not Active' }}</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="media">
-                                    <div class="media-icon bg-success text-success">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <span>Placement By</span> <a
-                                            href="javascript:void(0);">{{ $User->memberTree->placement_id ? $User->memberTree->byPlacement->username : 'System' }}</a>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="media-icon bg-info text-info">
-                                        <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <span>Activation Date</span> <a
-                                            href="javascript:void(0);">{{ $User->memberTree->is_premium ? $User->memberTree->is_premium->format('d-M-Y') : 'Not Active' }}</a>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="media-icon bg-danger text-danger">
-                                        <i class="ri-link-unlink-m"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <span>Achievement</span> <a
-                                            href="javascript:void(0);">{{ $User->memberTree->incentive_id ? config('mlm.incentives.' . $User->memberTree->incentive_id . '.title') : 'Not Active' }}</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endhasanyrole
                         @endif
                     </div>
-                    <div class="row mt-2 pb-2 bg-primary">
-                        <div class="col-lg-12">
-                            <x-input.text-copy wire:model="ref_url" label="Share referral link" read-only="true" />
+                    @hasanyrole('superadmin|admin|user')
+                        <div class="row mt-2 pb-2 bg-primary">
+                            <div class="col-lg-12">
+                                <x-input.text-copy wire:model="ref_url" label="Share referral link" read-only="true" />
+                            </div>
                         </div>
-                    </div>
+                    @endhasanyrole
                 </div>
             </x-card>
         </div>
         <div class="col-lg-8">
             <div class="row">
-                <div class="col-xl-3 col-lg-6 col-md-6">
-                    <x-card class="bg-primary">
-                        <div class="counter-status md-mb-0">
-                            <div class="text-center mb-2">
-                                <x-heroicon-m-link class="about-icons" />
+                @hasanyrole('superadmin|admin|user')
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <x-card class="bg-primary">
+                            <div class="counter-status md-mb-0">
+                                <div class="text-center mb-2">
+                                    <x-heroicon-m-link class="about-icons" />
+                                </div>
+                                <div class="text-center text-white">
+                                    <h2 class="counter mb-2">{{ $TotalSponsor }}</h2>
+                                    <h6 class="mb-0">Total Sponsor</h6>
+                                </div>
                             </div>
-                            <div class="text-center text-white">
-                                <h2 class="counter mb-2">{{ $TotalSponsor }}</h2>
-                                <h6 class="mb-0">Total Sponsor</h6>
-                            </div>
-                        </div>
-                    </x-card>
-                </div>
+                        </x-card>
+                    </div>
+                @endhasanyrole
                 <div class="col-xl-3 col-lg-6 col-md-6">
                     <div class="card bg-danger">
                         <div class="card-body">
@@ -242,52 +242,53 @@
                         @endhasanyrole
                     @endforeach
 
-
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="card bg-info">
-                            <div class="card-body">
-                                <div class="counter-status md-mb-0">
-                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
-                                    </div>
-                                    <div class="text-center mb-1">
-                                        <h2 class="counter mb-2">{{ abs($User->generation_income) }}
-                                        </h2>
-                                        <h6 class="mb-0">Total Sales Member</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="card bg-info">
-                            <div class="card-body">
-                                <div class="counter-status md-mb-0">
-                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
-                                    </div>
-                                    <div class="text-center mb-1">
-                                        <h2 class="counter mb-2">{{ abs($User->generation_income) }}
-                                        </h2>
-                                        <h6 class="mb-0">Sales Point 1</h6>
+                    @hasanyrole('superadmin|admin|user')
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="card bg-info">
+                                <div class="card-body">
+                                    <div class="counter-status md-mb-0">
+                                        <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                        </div>
+                                        <div class="text-center mb-1">
+                                            <h2 class="counter mb-2">{{ abs($User->generation_income) }}
+                                            </h2>
+                                            <h6 class="mb-0">Total Sales Member</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="card bg-info">
-                            <div class="card-body">
-                                <div class="counter-status md-mb-0">
-                                    <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
-                                    </div>
-                                    <div class="text-center mb-1">
-                                        <h2 class="counter mb-2">{{ abs($User->generation_income) }}
-                                        </h2>
-                                        <h6 class="mb-0">Sales Point 2</h6>
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="card bg-info">
+                                <div class="card-body">
+                                    <div class="counter-status md-mb-0">
+                                        <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                        </div>
+                                        <div class="text-center mb-1">
+                                            <h2 class="counter mb-2">{{ abs($User->generation_income) }}
+                                            </h2>
+                                            <h6 class="mb-0">Sales Point 1</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="card bg-info">
+                                <div class="card-body">
+                                    <div class="counter-status md-mb-0">
+                                        <div class="text-center mb-1"> <x-heroicon-c-banknotes class="about-icons" />
+                                        </div>
+                                        <div class="text-center mb-1">
+                                            <h2 class="counter mb-2">{{ abs($User->generation_income) }}
+                                            </h2>
+                                            <h6 class="mb-0">Sales Point 2</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endhasanyrole
                 @endif
             </div>
         </div>

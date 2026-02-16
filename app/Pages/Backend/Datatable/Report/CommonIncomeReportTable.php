@@ -1,16 +1,14 @@
 <?php
-
 namespace App\Pages\Backend\Datatable\Report;
 
 use App\Models\Income;
 use Illuminate\Database\Eloquent\Builder;
-use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Http\Common\LaravelLivewireTables\LinkColumn;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
-class RoiIncomeReportTable extends DataTableComponent
+class CommonIncomeReportTable extends DataTableComponent
 {
+    public $income_type;
     protected $index = 0;
 
     public function configure(): void
@@ -20,24 +18,27 @@ class RoiIncomeReportTable extends DataTableComponent
         $this->setPerPageAccepted(perPageRows());
         $this->setTableAttributes([
             'class' => 'table-sm',
-          ]);
+        ]);
         $this->setDefaultSort('id', 'desc');
     }
 
     public function builder(): Builder
     {
-        $Income =  Income::query()->with('Parent:id,name,username')->whereType(2);
+        $Income = Income::query()->with('Parent:id,name,username')->whereType($this->income_type);
 
         $Income->whereUserId(auth()->id());
 
         return $Income;
     }
 
-
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")->format(fn() => ++$this->index +  ($this->getPage() - 1) * $this->perPage),
+            Column::make("Id", "id")->format(fn() => ++$this->index + ($this->getPage() - 1) * $this->perPage),
+            Column::make("Refer Name", "Parent.name")->searchable()->sortable()->hideIf(! in_array($this->income_type, [1])),
+            Column::make("Refer ID", "Parent.username")->searchable()->sortable()->hideIf(! in_array($this->income_type, [1])),
+            Column::make("From Level", "level")->searchable()->sortable()->hideIf(! in_array($this->income_type, [3])),
+            Column::make("From Step", "level")->searchable()->sortable()->hideIf(! in_array($this->income_type, [4])),
             Column::make("Amount", "amount")->format(
                 fn($value, $row, Column $column) => numberFormat($value ? $value : 0, true)
             )->searchable()->sortable(),
