@@ -16,11 +16,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('fund:attachment')->hourly();
+        $schedule->command('fund:attachment')->hourly();
         $schedule->command('member:statement')->daily();
-        $schedule->command('return:statement')->daily();
+        // $schedule->command('return:statement')->daily();
         $schedule->command('backup:run --only-db --only-to-disk=google')->daily();
-        $schedule->command('cashback:statement')->daily();
+        // $schedule->command('cashback:statement')->daily();
     }
 
     /**
