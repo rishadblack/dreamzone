@@ -62,6 +62,12 @@ class MemberTable extends DataTableComponent
                 )
                 ->sortable()
                 ->searchable(),
+            Column::make('Valid', 'is_valid')
+                ->format(
+                    fn($value, $row, Column $column) => $value ? 'Y' : 'N'
+                )
+                ->sortable()
+                ->searchable(),
             Column::make('Founder', 'is_founder')
                 ->format(
                     fn($value, $row, Column $column) => $value ? 'Y' : 'N'

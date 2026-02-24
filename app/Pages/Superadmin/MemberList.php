@@ -1,16 +1,14 @@
 <?php
-
 namespace App\Pages\Superadmin;
 
-use App\Models\User;
+use App\Http\Common\Component;
 use App\Models\Country;
 use App\Models\Package;
-use App\Http\Common\Component;
-use App\Traits\UserTrait;
-use Livewire\Attributes\On;
-use Livewire\WithFileUploads;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
 
 class MemberList extends Component
 {
@@ -36,8 +34,8 @@ class MemberList extends Component
     public $is_not_transferable;
     public $is_not_withdrawalable;
     public $is_founder;
+    public $is_valid;
     public $free_upgrade;
-
 
     #[On('openMemberModal')]
     public function openMemberModal($data = null)
@@ -74,16 +72,15 @@ class MemberList extends Component
             'sponsor_username' => ['nullable', 'exists:users,username'],
             'username' => [
                 'required',
-                    function ($attribute, $value, $fail) {
-                        if (User::where('id', '!=', $this->user_id)->whereUsername($value)->exists()) {
-                            $fail('The ' . $attribute . ' is already exists.');
-                        }
-                    },
-                ],
+                function ($attribute, $value, $fail) {
+                    if (User::where('id', '!=', $this->user_id)->whereUsername($value)->exists()) {
+                        $fail('The ' . $attribute . ' is already exists.');
+                    }
+                },
+            ],
         ]);
 
         $SponsorUser = User::whereUsername($this->sponsor_username)->first();
-
 
         $User = User::find($this->user_id);
         $User->name = $this->name;
@@ -98,25 +95,25 @@ class MemberList extends Component
 
         if ($this->is_banned) {
             $User->is_banned = $User->is_banned ? $User->is_banned : now();
-        } elseif (!$this->is_banned) {
+        } elseif (! $this->is_banned) {
             $User->is_banned = null;
         }
 
         if ($this->is_approve) {
             $User->is_approve = $User->is_approve ? $User->is_approve : now();
-        } elseif (!$this->is_approve) {
+        } elseif (! $this->is_approve) {
             $User->is_approve = null;
         }
 
         if ($this->is_not_transferable) {
             $User->is_not_transferable = $User->is_not_transferable ? $User->is_not_transferable : now();
-        } elseif (!$this->is_not_transferable) {
+        } elseif (! $this->is_not_transferable) {
             $User->is_not_transferable = null;
         }
 
         if ($this->is_not_withdrawalable) {
             $User->is_not_withdrawalable = $User->is_not_withdrawalable ? $User->is_not_withdrawalable : now();
-        } elseif (!$this->is_not_withdrawalable) {
+        } elseif (! $this->is_not_withdrawalable) {
             $User->is_not_withdrawalable = null;
         }
 
@@ -128,6 +125,7 @@ class MemberList extends Component
 
         $User->memberTree->sponsor_id = $this->sponsor_username ? $SponsorUser->id : null;
         $User->memberTree->is_founder = $this->is_founder ? now() : null;
+        $User->memberTree->is_valid = $this->is_valid ? now() : null;
         $User->free_upgrade = $this->free_upgrade;
         $User->memberTree->save();
 

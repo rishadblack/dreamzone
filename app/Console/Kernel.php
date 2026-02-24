@@ -8,7 +8,7 @@ class Kernel extends ConsoleKernel
 {
     protected function scheduleTimezone()
     {
-        return 'Europe/London';
+        return 'Asia/Dhaka';
     }
 
     /**

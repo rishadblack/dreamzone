@@ -10,7 +10,17 @@ use Nwidart\Modules\Facades\Module;
 if (! function_exists('incomeGenerateCondition')) {
     function incomeGenerateCondition($UserId)
     {
-        return MemberTree::whereUserId($UserId)->whereNotNull('is_premium')->where('p_point', '>=', 100)->exists();
+        $MemberTree = MemberTree::whereUserId($UserId)->first();
+
+        if ($MemberTree->is_valid) {
+            return true;
+        }
+
+        if ($MemberTree->is_premium && $MemberTree->p_point >= 100) {
+            return true;
+        }
+
+        return false;
     }
 }
 
