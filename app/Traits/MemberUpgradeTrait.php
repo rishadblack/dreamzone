@@ -71,16 +71,22 @@ trait MemberUpgradeTrait
 
         $User = User::sumPoint()->find($user_id);
 
-        if ($User->available_point <= 0) {
+        if (! $User) {
             return true;
         }
 
-        if (! $User->memberTree->sponsor_id) {
-            return true;
-        }
+        if ($User->id !== 1) {
+            if ($User->available_point <= 0) {
+                return true;
+            }
 
-        if (! $User->memberTree->placement_id) {
-            return true;
+            if (! $User->memberTree->sponsor_id) {
+                return true;
+            }
+
+            if (! $User->memberTree->placement_id) {
+                return true;
+            }
         }
 
         $PointUpgrade = new Point;
