@@ -138,19 +138,49 @@ return [
         ],
     ],
     'income_type' => [
+        1 => [
+            'name' => config('mlm.income_list.1.title'),
+            'value' => config('mlm.income_list.1.name'),
+            'class' => 'success',
+        ],
         2 => [
-            'name' => 'ROI Bonus',
-            'value' => 'inactive',
+            'name' => config('mlm.income_list.2.title'),
+            'value' => config('mlm.income_list.2.name'),
             'class' => 'success',
         ],
         3 => [
-            'name' => 'Incentive Bonus',
-            'value' => 'inactive',
+            'name' => config('mlm.income_list.3.title'),
+            'value' => config('mlm.income_list.3.name'),
             'class' => 'success',
         ],
         4 => [
-            'name' => 'Level Bonus',
-            'value' => 'inactive',
+            'name' => config('mlm.income_list.4.title'),
+            'value' => config('mlm.income_list.4.name'),
+            'class' => 'success',
+        ],
+        5 => [
+            'name' => config('mlm.income_list.5.title'),
+            'value' => config('mlm.income_list.5.name'),
+            'class' => 'success',
+        ],
+        6 => [
+            'name' => config('mlm.income_list.6.title'),
+            'value' => config('mlm.income_list.6.name'),
+            'class' => 'success',
+        ],
+        7 => [
+            'name' => config('mlm.income_list.7.title'),
+            'value' => config('mlm.income_list.7.name'),
+            'class' => 'success',
+        ],
+        8 => [
+            'name' => config('mlm.income_list.8.title'),
+            'value' => config('mlm.income_list.8.name'),
+            'class' => 'success',
+        ],
+        9 => [
+            'name' => config('mlm.income_list.9.title'),
+            'value' => config('mlm.income_list.9.name'),
             'class' => 'success',
         ],
         50 => [

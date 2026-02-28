@@ -269,7 +269,7 @@ class MemberStatement extends Command
             $currentLavel = $level;
             $generationBonusAmount = 0;
 
-            $generationBonusAmount = $generationBonus * config('mlm.generation_list.' . $currentLavel . '.percentage') / 100;
+            $generationBonusAmount = $generationBonus * config('mlm.generation_income_list.' . $currentLavel . '.percentage') / 100;
 
             if ($generationBonusAmount > 0) {
                 if (incomeGenerateCondition($SponsorMemberTree->user_id)) {
